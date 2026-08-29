@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -9,7 +10,6 @@ import {
   CircleDot,
   Layers3,
   Menu,
-  MonitorPlay,
   PanelsTopLeft,
   PlugZap,
   Smartphone,
@@ -336,7 +336,7 @@ export default function Home() {
       <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
         <div className="header-inner">
           <a href="#top" className="brand" aria-label="DG Webservices home" onClick={closeMenu}>
-            <img src="/brand/dg-mark.svg" alt="" width="67" height="36" />
+            <img src="/brand/dg-mark-reversed.svg" alt="" width="67" height="36" />
             <span>DG <strong>Webservices</strong></span>
           </a>
 
@@ -408,7 +408,7 @@ export default function Home() {
             </div>
             <div className="hero-proof">
               <div className="proof-mark">
-                <img src="/brand/dg-mark.svg" alt="" width="54" height="28" />
+                <img src="/brand/dg-mark-reversed.svg" alt="" width="54" height="28" />
               </div>
               <p>
                 <strong>Eén partner.</strong>
@@ -417,70 +417,23 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-stage" aria-label="Voorbeeld van een digitaal productecosysteem">
+          <div className="hero-stage hero-photo-stage" aria-label="Digitale producten op desktop, laptop, tablet en mobiel">
             <div className="stage-aura" aria-hidden="true" />
-            <div className="stage-browser">
-              <div className="stage-bar">
-                <div><i /><i /><i /></div>
-                <span>product.dgw</span>
-                <b>Live</b>
-              </div>
-              <div className="stage-content">
-                <aside>
-                  <div className="stage-mark"><img src="/brand/dg-mark.svg" alt="" /></div>
-                  <i className="active" />
-                  <i />
-                  <i />
-                  <i />
-                </aside>
-                <div className="stage-main">
-                  <div className="stage-welcome">
-                    <span>Vandaag</span>
-                    <strong>Alles onder controle.</strong>
-                  </div>
-                  <div className="stage-metrics">
-                    <article>
-                      <span>Actieve flows</span>
-                      <strong>24</strong>
-                      <b>+3</b>
-                    </article>
-                    <article>
-                      <span>Publicaties</span>
-                      <strong>128</strong>
-                      <b>Live</b>
-                    </article>
-                    <article>
-                      <span>Integraties</span>
-                      <strong>08</strong>
-                      <b>Stabiel</b>
-                    </article>
-                  </div>
-                  <div className="stage-graph">
-                    <div className="graph-heading"><span>Productactiviteit</span><b>Deze week</b></div>
-                    <svg viewBox="0 0 520 155" role="img" aria-label="Stijgende activiteitsgrafiek">
-                      <defs>
-                        <linearGradient id="graphFill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stopColor="#2563EB" stopOpacity=".36" />
-                          <stop offset="1" stopColor="#2563EB" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <path d="M0 126 C42 124 47 104 88 109 S145 92 181 95 S229 42 266 68 S320 93 355 51 S417 48 447 27 S488 20 520 7 V155 H0 Z" fill="url(#graphFill)" />
-                      <path d="M0 126 C42 124 47 104 88 109 S145 92 181 95 S229 42 266 68 S320 93 355 51 S417 48 447 27 S488 20 520 7" fill="none" stroke="#3B82F6" strokeWidth="4" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="stage-phone">
-              <div className="phone-top" />
-              <span>Vandaag</span>
-              <strong>Goedemiddag.</strong>
-              <div className="phone-card">
-                <i><MonitorPlay size={18} /></i>
-                <p><b>Publicatie klaar</b><small>Alle schermen bijgewerkt</small></p>
-              </div>
-              <div className="phone-bars"><i /><i /><i /><i /><i /></div>
-              <button type="button">Open studio</button>
+            <figure className="hero-photo-frame">
+              <img
+                src="/assets/hero-digital-studio.png"
+                alt="Premium digitale productwerkplek met meerdere gekoppelde interfaces"
+              />
+              <div className="hero-photo-shade" aria-hidden="true" />
+              <figcaption>
+                <span>Web · platform · mobiel</span>
+                <strong>Eén consistente productervaring.</strong>
+              </figcaption>
+            </figure>
+            <div className="hero-photo-card">
+              <div className="hero-photo-card-icon"><Workflow size={18} /></div>
+              <p><span>Van voor- tot achterkant</span><b>Ontwerp en techniek in één lijn</b></p>
+              <i><Check size={14} /></i>
             </div>
             <div className="floating-badge floating-badge-one">
               <Check size={16} />
@@ -587,6 +540,33 @@ export default function Home() {
               </article>
             ))}
           </div>
+
+          <article className="featured-sport">
+            <div className="featured-sport-image">
+              <img
+                src="/assets/sports-platforms.png"
+                alt="Digitale wedstrijdregie in een voetbalclubhuis met zicht op het veld"
+              />
+              <div className="featured-sport-tags" aria-label="Onderdelen">
+                <span>Live data</span>
+                <span>Wedstrijdregie</span>
+                <span>Narrowcasting</span>
+              </div>
+            </div>
+            <div className="featured-sport-copy">
+              <p className="eyebrow eyebrow-light"><span />Uitgelicht domein</p>
+              <h3>Sport als digitale proeftuin.</h3>
+              <p>
+                In VeyoCast en het Haaglanden Toernooiplatform komen live
+                informatie, verschillende rollen en tijdkritische communicatie
+                samen. Precies daar bewijst een helder productontwerp zijn
+                waarde.
+              </p>
+              <button type="button" onClick={() => setSelectedProject(projects[0])}>
+                Bekijk VeyoCast <ArrowUpRight size={17} />
+              </button>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -612,31 +592,19 @@ export default function Home() {
             </ul>
             <a href="#contact" className="text-link">Vertel waar het nu vastloopt <ArrowRight size={17} /></a>
           </div>
-          <div className="system-visual" aria-label="Schema van gekoppelde digitale onderdelen">
-            <div className="system-core">
-              <img src="/brand/dg-mark.svg" alt="" />
-              <span>Product core</span>
+          <div className="system-image" aria-label="Klantportaal, planning, betalingen en beheer op gekoppelde apparaten">
+            <img
+              src="/assets/connected-business.png"
+              alt="Desktop, tablet en mobiel als één verbonden digitaal bedrijfssysteem"
+            />
+            <div className="system-image-overlay" aria-hidden="true" />
+            <div className="system-image-badge badge-portal"><Smartphone size={16} /><span>Klantportaal</span></div>
+            <div className="system-image-badge badge-flow"><Workflow size={16} /><span>Procesflow</span></div>
+            <div className="system-image-badge badge-api"><PlugZap size={16} /><span>Integraties</span></div>
+            <div className="system-image-caption">
+              <img src="/brand/dg-mark-reversed.svg" alt="" />
+              <p><span>Connected business</span><b>Alles werkt als één product.</b></p>
             </div>
-            {[
-              ["Website", PanelsTopLeft],
-              ["Backoffice", Workflow],
-              ["Mobiel", Smartphone],
-              ["Integraties", PlugZap],
-            ].map(([label, Icon], index) => {
-              const SystemIcon = Icon as typeof PanelsTopLeft;
-              return (
-                <div className={"system-node node-" + (index + 1)} key={label as string}>
-                  <SystemIcon />
-                  <span>{label as string}</span>
-                </div>
-              );
-            })}
-            <svg className="system-lines" viewBox="0 0 620 500" aria-hidden="true">
-              <path d="M310 250 C220 250 210 105 104 105" />
-              <path d="M310 250 C402 250 412 105 516 105" />
-              <path d="M310 250 C220 250 210 395 104 395" />
-              <path d="M310 250 C402 250 412 395 516 395" />
-            </svg>
           </div>
         </div>
       </section>
@@ -752,7 +720,7 @@ export default function Home() {
       <footer>
         <div className="container footer-top">
           <a href="#top" className="brand footer-brand" aria-label="Naar boven">
-            <img src="/brand/dg-mark.svg" alt="" width="72" height="39" />
+            <img src="/brand/dg-mark-reversed.svg" alt="" width="72" height="39" />
             <span>DG <strong>Webservices</strong></span>
           </a>
           <p>Websites. Platforms. Software.<br />Gebouwd om vooruit te bewegen.</p>
@@ -760,6 +728,7 @@ export default function Home() {
             <a href="#expertise">Expertise</a>
             <a href="#werk">Werk</a>
             <a href="#werkwijze">Werkwijze</a>
+            <Link href="/brand">Merkconcept</Link>
             <a href="mailto:hello@dgwebservices.com">E-mail</a>
           </nav>
         </div>
