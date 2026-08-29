@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DG Webservices — Websites, platforms & software",
+  title: "DG Webservices — Websites, portalen & webapplicaties",
   description:
-    "DG Webservices ontwerpt en bouwt snelle websites, SaaS-platforms, portals en slimme software vanuit Den Haag.",
+    "DG Webservices ontwerpt en bouwt websites, portalen, webapplicaties en koppelingen vanuit Den Haag.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

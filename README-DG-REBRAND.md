@@ -5,7 +5,7 @@ Dit pakket bevat het volledige, responsieve prototype van de nieuwe DG Webservic
 ## Merkfundament
 
 - Positionering: digitale productstudio uit Den Haag.
-- Hoofdbelofte: websites, platforms en software die organisaties echt vooruithelpen.
+- Hoofdbelofte: websites, portalen en webapplicaties die organisaties echt vooruithelpen.
 - Kernwaarden: helder, betrokken, precies en ondernemend.
 - Basiskleuren: Deep Navy #071426, Cobalt Blue #2563EB, Cool Slate #64748B en Ice White #F5F8FC.
 - Displayfont: Space Grotesk.
@@ -14,23 +14,26 @@ Dit pakket bevat het volledige, responsieve prototype van de nieuwe DG Webservic
 
 ## Routes
 
-- / — volledig homepage- en portfolioprototype.
+- / — volledig homepage- en dienstenprototype.
 - /brand — logo-, kleur-, typografie-, beeld- en tone-of-voicepresentatie.
 
 ## Werkende onderdelen
 
 - Responsieve desktop-, tablet- en mobiele layout.
 - Sticky navigatie en toegankelijk mobiel menu.
-- Projectfilters voor platforms, websites en portals.
-- Projectdetails in toegankelijke dialoogvensters.
-- Uitgelichte sport-/wedstrijdzakenpresentatie.
+- Acht herkenbare diensten in een heldere dienstenarchitectuur.
+- Dienstdetails in toegankelijke dialoogvensters.
+- Functionele presentaties voor sport, schermcommunicatie en verbonden processen.
 - Interactieve projectstarter die een ingevulde e-mail opent.
 - Direct downloadbare SVG-logovarianten.
 - Bewegende interfaceaccenten met ondersteuning voor prefers-reduced-motion.
 
-## Portfolio-inhoud
+## Diensteninhoud
 
-Het prototype laat projecten en productrichtingen zien rond VeyoCast, het Haaglanden Toernooiplatform, NXTDRIVE, Club Kit Portal, Absolutely Fit, PMU & Beauty by Sam, Les Riooltechniek en Fetti. De teksten gebruiken geen onbevestigde prestatiecijfers of testimonials. Productstatussen moeten vóór publieke livegang nog één keer worden bevestigd.
+Het prototype gebruikt uitsluitend functionele dienstnamen en voorbeelden. Er
+worden geen klant-, product- of technologiemerken als portfolio-item genoemd.
+De inhoud beschrijft websites, webapplicaties, portalen, backoffice, koppelingen,
+slimme flows, schermcommunicatie en beheer.
 
 ## Merkmiddelen
 
@@ -70,8 +73,6 @@ npm run build
 ## Nog bevestigen vóór publieke productie
 
 1. Definitief contactadres, KvK-, btw- en privacygegevens.
-2. Welke projecten publiek bij naam mogen worden getoond.
-3. Statusaanduidingen per project en eventuele live links.
-4. Definitieve domeinnaam en e-mailafhandeling.
-5. Contactformulier of CRM-koppeling wanneer meer dan de huidige e-mailstarter gewenst is.
-6. Metadata, structured data, sitemap en definitieve privacy-/cookie-inrichting.
+2. Definitieve domeinnaam en e-mailafhandeling.
+3. Contactformulier of relatiebeheerkoppeling wanneer meer dan de huidige e-mailstarter gewenst is.
+4. Metadata, structured data, sitemap en definitieve privacy-/cookie-inrichting.

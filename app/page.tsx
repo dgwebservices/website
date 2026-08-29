@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -9,9 +9,13 @@ import {
   Check,
   CircleDot,
   Layers3,
+  LayoutDashboard,
   Menu,
+  Monitor,
+  MousePointerClick,
   PanelsTopLeft,
   PlugZap,
+  RefreshCw,
   Smartphone,
   Workflow,
   X,
@@ -24,279 +28,168 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import styles from "./home.module.css";
 
-type Project = {
+type Service = {
   id: string;
-  title: string;
-  category: "Platforms" | "Websites" | "Portals";
+  number: string;
   label: string;
-  status: string;
+  title: string;
   summary: string;
-  challenge: string;
-  solution: string;
-  capabilities: string[];
-  accent: string;
-  preview: "screens" | "tournament" | "drive" | "kit" | "fitness" | "beauty" | "service" | "gift";
+  useful: string;
+  tags: string[];
+  icon: typeof PanelsTopLeft;
+  tone: "blue" | "navy" | "ice" | "white";
 };
 
-const projects: Project[] = [
+const services: Service[] = [
   {
-    id: "veyocast",
-    title: "VeyoCast",
-    category: "Platforms",
-    label: "Narrowcasting SaaS",
-    status: "Eigen product · in ontwikkeling",
-    summary:
-      "Een centraal platform waarmee sportverenigingen schermen, sponsors, live wedstrijddata en clubcontent vanuit één studio aansturen.",
-    challenge:
-      "Clubcommunicatie staat vaak verspreid over losse schermen, bestanden en handmatige updates.",
-    solution:
-      "Een schaalbare studio met schermgroepen, planning, live databronnen en slimme publicatieregels.",
-    capabilities: ["Multi-tenant", "Screen groups", "Live data", "Sponsorregels", "Publisher"],
-    accent: "#2563EB",
-    preview: "screens",
-  },
-  {
-    id: "haaglanden",
-    title: "Haaglanden Toernooi",
-    category: "Platforms",
-    label: "Tournament operations",
-    status: "Platformprototype",
-    summary:
-      "Een wedstrijdzakenplatform voor toernooileiding, clubs, teammanagers, scheidsrechters en supporters.",
-    challenge:
-      "Loting, wedstrijdplanning, spelerslijsten en communicatie vragen tijdens een toernooi om één betrouwbare waarheid.",
-    solution:
-      "Een rolgestuurde PWA waarin operatie en publieke beleving direct op elkaar aansluiten.",
-    capabilities: ["Live loting", "Brackets", "Matchcentre", "Scheidsplanning", "PWA"],
-    accent: "#10B981",
-    preview: "tournament",
-  },
-  {
-    id: "nxtdrive",
-    title: "NXTDRIVE",
-    category: "Platforms",
-    label: "Rijschoolplatform",
-    status: "SaaS-product",
-    summary:
-      "Een complete digitale omgeving voor intake, leerlingen, instructeurs, planning en dagelijkse operatie.",
-    challenge:
-      "Leads, lesplanning, voortgang en communicatie lopen bij rijscholen snel door elkaar.",
-    solution:
-      "Eén productervaring met een slimme intake, backoffice en rolgerichte cockpits.",
-    capabilities: ["Intakeflow", "Planning", "Leerlingportaal", "Instructeurcockpit", "Backoffice"],
-    accent: "#F59E0B",
-    preview: "drive",
-  },
-  {
-    id: "club-kit",
-    title: "Club Kit Portal",
-    category: "Portals",
-    label: "Leden- & uitgifteportaal",
-    status: "Maatwerkportaal",
-    summary:
-      "Een gestroomlijnde kledingflow van maatkeuze en betaling tot QR-uitgifte en nalevering.",
-    challenge:
-      "Honderden leden, verschillende maten, deelpakketten en betalingen zijn foutgevoelig in losse lijsten.",
-    solution:
-      "Een ouderportaal, backoffice en uitgiftescherm die dezelfde actuele status delen.",
-    capabilities: ["OTP toegang", "iDEAL", "QR-uitgifte", "Voorraadstatus", "E-mailflows"],
-    accent: "#3B82F6",
-    preview: "kit",
-  },
-  {
-    id: "absolutely-fit",
-    title: "Absolutely Fit",
-    category: "Websites",
-    label: "Fitness experience",
-    status: "Premium prototype",
-    summary:
-      "Een energieke merkervaring met een begeleide eerste-bezoekwizard, ledenportaal en visuele roosterbackoffice.",
-    challenge:
-      "Een fitnesswebsite moet tegelijk inspireren, duidelijk uitleggen en nieuwe bezoekers zonder frictie laten starten.",
-    solution:
-      "Een mobile-first ervaring waarin merk, keuzehulp, planning en beheer één geheel vormen.",
-    capabilities: ["Bezoekwizard", "Lesrooster", "Ledenportaal", "Drag & drop", "Motion"],
-    accent: "#EF4444",
-    preview: "fitness",
-  },
-  {
-    id: "beauty-by-sam",
-    title: "PMU & Beauty by Sam",
-    category: "Websites",
-    label: "Booking experience",
-    status: "Conversieconcept",
-    summary:
-      "Een hoogwaardige salonwebsite waarin behandeling, vertrouwen en direct boeken logisch samenkomen.",
-    challenge:
-      "Bezoekers willen eerst zekerheid over een behandeling en daarna zonder omwegen een geschikt moment kiezen.",
-    solution:
-      "Een treatment finder en geïntegreerde boekingsroute rondom de bestaande salonplanning.",
-    capabilities: ["Treatment finder", "Salonized", "Aanbetaling", "Giftcards", "Reviews"],
-    accent: "#D977A8",
-    preview: "beauty",
-  },
-  {
-    id: "les-riooltechniek",
-    title: "Les Riooltechniek",
-    category: "Websites",
-    label: "Servicewebsite",
-    status: "Premium prototype",
-    summary:
-      "Een lokale servicewebsite die vakmanschap, spoedhulp en duidelijke dienstverlening direct voelbaar maakt.",
-    challenge:
-      "Bij acute problemen moet een bezoeker binnen enkele seconden vertrouwen krijgen en de juiste actie vinden.",
-    solution:
-      "Sterke lokale positionering, echte projectbeelden en snelle routes naar dienst, regio en contact.",
-    capabilities: ["Lokale SEO", "Dienststructuur", "Spoedflow", "Projectwerk", "Responsive"],
-    accent: "#F97316",
-    preview: "service",
-  },
-  {
-    id: "fetti",
-    title: "Fetti",
-    category: "Platforms",
-    label: "Group gifting",
-    status: "Productconcept",
-    summary:
-      "Een vrolijke, social-first giftingervaring voor cadeaupotten, bijdragen, reveals en gezamenlijke momenten.",
-    challenge:
-      "Samen een cadeau regelen voelt vaak administratief terwijl het moment juist persoonlijk en feestelijk is.",
-    solution:
-      "Een soepele betaal- en revealflow die de organisatie eenvoudig houdt en de beleving centraal zet.",
-    capabilities: ["Cadeaupotten", "Payments", "Reveal templates", "Sharing", "Dashboard"],
-    accent: "#8B5CF6",
-    preview: "gift",
-  },
-];
-
-const services = [
-  {
+    id: "websites",
     number: "01",
-    title: "Websites die overtuigen",
-    text: "Een onderscheidende merkervaring, razendsnel gebouwd en ingericht rond vertrouwen, vindbaarheid en conversie.",
+    label: "Websites",
+    title: "Websites die richting geven",
+    summary:
+      "Een onderscheidende website waarin uitstraling, inhoud en gebruiksgemak één geheel vormen.",
+    useful:
+      "Voor een nieuwe positionering, een verouderde website of een gerichte campagne die echt moet presteren.",
+    tags: ["Responsive ontwerp", "Contentbeheer", "Vindbaarheid", "Performance"],
     icon: PanelsTopLeft,
-    tags: ["Strategie", "UX/UI", "Next.js", "SEO"],
+    tone: "blue",
   },
   {
+    id: "platforms",
     number: "02",
-    title: "Platforms die processen dragen",
-    text: "SaaS-producten en backoffices die rollen, data en dagelijkse workflows terugbrengen naar één heldere omgeving.",
+    label: "Webapplicaties",
+    title: "Software op maat van je proces",
+    summary:
+      "Eén digitale omgeving rond jouw gebruikers, dagelijkse werk en concrete doelen.",
+    useful:
+      "Wanneer standaardsoftware niet goed aansluit of handmatig werk ongemerkt blijft groeien.",
+    tags: ["Gebruikersaccounts", "Rollen en rechten", "Dashboards", "Werkstromen"],
     icon: Layers3,
-    tags: ["SaaS", "Dashboards", "Rollen", "Roadmap"],
+    tone: "navy",
   },
   {
+    id: "portalen",
     number: "03",
-    title: "Portals die mensen verbinden",
-    text: "Klant-, leden- en teamomgevingen die op ieder scherm logisch voelen en complexe handelingen eenvoudig maken.",
+    label: "Portalen",
+    title: "Alles voor klanten en leden op één plek",
+    summary:
+      "Een veilige, prettige omgeving voor gegevens, aanvragen, documenten, betalingen en contact.",
+    useful:
+      "Wanneer informatie nu verspreid staat over e-mail, losse bestanden en verschillende systemen.",
+    tags: ["Veilig inloggen", "Profielen", "Documenten", "Betalingen"],
     icon: Smartphone,
-    tags: ["PWA", "Portals", "Onboarding", "Notificaties"],
+    tone: "ice",
   },
   {
+    id: "backoffice",
     number: "04",
-    title: "Koppelingen die werk besparen",
-    text: "Betalingen, planning, e-mail, CRM en externe databronnen betrouwbaar aan elkaar verbonden.",
+    label: "Backoffice",
+    title: "Rust en overzicht achter de schermen",
+    summary:
+      "Een heldere beheeromgeving voor gegevens, planning, aanvragen, statussen en dagelijkse acties.",
+    useful:
+      "Wanneer beheer foutgevoelig, tijdrovend of lastig overdraagbaar is geworden.",
+    tags: ["Databeheer", "Planning", "Statusflows", "Rapportages"],
+    icon: LayoutDashboard,
+    tone: "white",
+  },
+  {
+    id: "koppelingen",
+    number: "05",
+    label: "Koppelingen",
+    title: "Systemen die vanzelf samenwerken",
+    summary:
+      "Informatie komt automatisch op de juiste plek, zonder dubbel invoeren of losse tussenstappen.",
+    useful:
+      "Wanneer dezelfde gegevens op meerdere plekken worden ingevoerd, gecontroleerd of bijgehouden.",
+    tags: ["Datakoppelingen", "Automatisering", "Import en export", "E-mailflows"],
     icon: PlugZap,
-    tags: ["API", "Webhooks", "Mollie", "Integraties"],
+    tone: "ice",
+  },
+  {
+    id: "conversie",
+    number: "06",
+    label: "Slimme flows",
+    title: "Van eerste klik tot bevestiging",
+    summary:
+      "Begeleide stappen voor reserveren, inschrijven, aanvragen en betalen zonder onnodige drempels.",
+    useful:
+      "Wanneer bezoekers afhaken of medewerkers iedere aanvraag handmatig moeten opvolgen.",
+    tags: ["Slimme formulieren", "Stappenplannen", "Beschikbaarheid", "Bevestigingen"],
+    icon: MousePointerClick,
+    tone: "white",
+  },
+  {
+    id: "schermen",
+    number: "07",
+    label: "Schermcommunicatie",
+    title: "De juiste content op ieder scherm",
+    summary:
+      "Centraal beheer voor schermen op locaties, met planning, groepen en actuele informatie.",
+    useful:
+      "Voor sportlocaties, ontvangstruimtes, horeca, evenementen en interne communicatie.",
+    tags: ["Centraal beheer", "Schermgroepen", "Tijdschema’s", "Live informatie"],
+    icon: Monitor,
+    tone: "navy",
+  },
+  {
+    id: "beheer",
+    number: "08",
+    label: "Beheer en groei",
+    title: "Blijven verbeteren na de lancering",
+    summary:
+      "Zorgvuldig beheer en gerichte doorontwikkeling houden je digitale product actueel en betrouwbaar.",
+    useful:
+      "Wanneer continuïteit belangrijk is en het product stap voor stap moet blijven meegroeien.",
+    tags: ["Monitoring", "Back-ups", "Updates", "Ondersteuning"],
+    icon: RefreshCw,
+    tone: "blue",
   },
 ];
 
 const process = [
   {
-    step: "01",
+    number: "01",
     title: "Scherpstellen",
-    text: "We brengen doel, gebruiker, kansen en technische grenzen terug tot een besluitbaar plan.",
+    text: "We brengen doel, gebruikers en prioriteiten terug tot een helder plan.",
   },
   {
-    step: "02",
+    number: "02",
     title: "Ervaarbaar maken",
-    text: "Je krijgt snel een realistisch prototype. Zo keur je niet alleen een idee, maar de echte ervaring.",
+    text: "Je beoordeelt een realistisch prototype in plaats van alleen losse ideeën.",
   },
   {
-    step: "03",
+    number: "03",
     title: "Bouwen",
-    text: "Het goedgekeurde product wordt degelijk, responsief en schaalbaar uitgewerkt.",
+    text: "Het gekozen ontwerp wordt snel, responsief en degelijk uitgewerkt.",
   },
   {
-    step: "04",
-    title: "Doorontwikkelen",
-    text: "Na de eerste werkbare versie groeien we gericht verder op basis van gebruik en prioriteit.",
+    number: "04",
+    title: "Verder brengen",
+    text: "Na de lancering verbeteren we gericht op basis van gebruik en nieuwe kansen.",
   },
 ];
 
-function ProductPreview({ project }: { project: Project }) {
-  const rows =
-    project.preview === "tournament"
-      ? ["TAVV — Duindorp", "Rijnsburg — DSV 2", "Finale — 16:30"]
-      : project.preview === "screens"
-        ? ["Clubhuis", "Bestuurskamer", "LED buiten"]
-        : project.preview === "drive"
-          ? ["Intake compleet", "Volgende les", "Voortgang"]
-          : project.preview === "kit"
-            ? ["Te halen", "Deellevering", "Afgerond"]
-            : ["Nieuwe aanvraag", "Planning", "Bevestigd"];
-
-  return (
-    <div className="project-preview" style={{ "--project-accent": project.accent } as React.CSSProperties}>
-      <div className="preview-glow" />
-      <div className="preview-window">
-        <div className="preview-topbar">
-          <span />
-          <span />
-          <span />
-          <div className="preview-title">{project.title}</div>
-        </div>
-        <div className="preview-layout">
-          <aside>
-            <div className="preview-logo"><CircleDot size={15} /></div>
-            <i />
-            <i />
-            <i />
-          </aside>
-          <div className="preview-content">
-            <div className="preview-kpis">
-              <b />
-              <b />
-              <b />
-            </div>
-            <div className="preview-list">
-              {rows.map((row, index) => (
-                <div key={row}>
-                  <span className="preview-index">0{index + 1}</span>
-                  <strong>{row}</strong>
-                  <em>{index === 0 ? "Live" : "Open"}</em>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="preview-mobile">
-        <div className="mobile-notch" />
-        <div className="mobile-chip" />
-        <strong>{project.title.slice(0, 12)}</strong>
-        <div className="mobile-chart">
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="mobile-action" />
-      </div>
-    </div>
-  );
-}
+const capabilityLine = [
+  "Websites",
+  "Portalen",
+  "Webapplicaties",
+  "Backoffice",
+  "Koppelingen",
+  "Schermcommunicatie",
+];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("Alles");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [projectType, setProjectType] = useState("Een website");
   const [projectGoal, setProjectGoal] = useState("Meer aanvragen");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -311,65 +204,51 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
-  const filteredProjects = useMemo(
-    () =>
-      activeFilter === "Alles"
-        ? projects
-        : projects.filter((project) => project.category === activeFilter),
-    [activeFilter],
-  );
-
-  const mailSubject = encodeURIComponent("Projectidee via dgwebservices.com");
+  const mailSubject = encodeURIComponent("Kennismaking via dgwebservices.com");
   const mailBody = encodeURIComponent(
-    "Hoi Danny,\n\nIk wil graag kennismaken over " +
-      projectType.toLowerCase() +
-      ".\nMijn belangrijkste doel: " +
-      projectGoal.toLowerCase() +
-      ".\n\nDit wil ik verder toelichten:\n",
+    `Hoi Danny,\n\nIk wil graag kennismaken over ${projectType.toLowerCase()}.\nMijn belangrijkste doel: ${projectGoal.toLowerCase()}.\n\nDit wil ik verder toelichten:\n`,
   );
-  const mailHref = "mailto:hello@dgwebservices.com?subject=" + mailSubject + "&body=" + mailBody;
-
+  const mailHref = `mailto:hello@dgwebservices.com?subject=${mailSubject}&body=${mailBody}`;
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <main id="top">
-      <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
-        <div className="header-inner">
-          <a href="#top" className="brand" aria-label="DG Webservices home" onClick={closeMenu}>
-            <img src="/brand/dg-mark-reversed.svg" alt="" width="67" height="36" />
-            <span>DG <strong>Webservices</strong></span>
+    <main id="top" className={styles.page}>
+      <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
+        <div className={styles.headerInner}>
+          <a href="#top" className={styles.logo} aria-label="DG Webservices home" onClick={closeMenu}>
+            <img src="/brand/dg-lockup.svg" alt="DG Webservices" width="230" height="55" />
           </a>
 
-          <nav className="desktop-nav" aria-label="Hoofdnavigatie">
-            <a href="#expertise">Expertise</a>
-            <a href="#werk">Werk</a>
+          <nav className={styles.desktopNav} aria-label="Hoofdnavigatie">
+            <a href="#diensten">Diensten</a>
+            <a href="#mogelijkheden">Mogelijkheden</a>
             <a href="#werkwijze">Werkwijze</a>
-            <a href="#over">Over DG</a>
+            <a href="#over">Over</a>
           </nav>
 
-          <a href="#contact" className="header-cta">
-            Bespreek jouw idee <ArrowUpRight size={16} />
+          <a href="#contact" className={styles.headerCta}>
+            Start een gesprek <ArrowUpRight size={15} />
           </a>
 
           <button
-            className="menu-button"
+            className={styles.menuButton}
             type="button"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
             aria-label={menuOpen ? "Menu sluiten" : "Menu openen"}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            {menuOpen ? <X /> : <Menu />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        <div id="mobile-navigation" className={menuOpen ? "mobile-nav is-open" : "mobile-nav"}>
+        <div id="mobile-navigation" className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ""}`}>
           <nav aria-label="Mobiele navigatie">
             {[
-              ["Expertise", "#expertise"],
-              ["Werk", "#werk"],
+              ["Diensten", "#diensten"],
+              ["Mogelijkheden", "#mogelijkheden"],
               ["Werkwijze", "#werkwijze"],
-              ["Over DG", "#over"],
+              ["Over", "#over"],
               ["Contact", "#contact"],
             ].map(([label, href]) => (
               <a key={href} href={href} onClick={closeMenu}>
@@ -380,111 +259,128 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="hero section-dark">
-        <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-orb hero-orb-one" aria-hidden="true" />
-        <div className="hero-orb hero-orb-two" aria-hidden="true" />
-        <div className="container hero-inner">
-          <div className="hero-copy">
-            <p className="eyebrow eyebrow-light">
-              <span />
-              Digital product studio · Den Haag
+      <section className={styles.hero}>
+        <div className={styles.heroGrid} aria-hidden="true" />
+        <div className={styles.heroBlob} aria-hidden="true" />
+        <div className={`${styles.shell} ${styles.heroInner}`}>
+          <div className={styles.heroCopy}>
+            <p className={styles.kicker}>
+              <span /> Ontwerp · ontwikkeling · doorontwikkeling
             </p>
             <h1>
-              Van idee naar digitaal product dat <em>écht werkt.</em>
+              Digitaal gemaakt.
+              <span>Helder geregeld.</span>
             </h1>
-            <p className="hero-lead">
-              DG Webservices ontwerpt en bouwt websites, platforms en software
-              die niet alleen mooi ogen, maar jouw organisatie aantoonbaar
-              slimmer laten werken.
+            <p className={styles.heroLead}>
+              Websites, portalen en webapplicaties die prettig werken, processen
+              eenvoudiger maken en klaar zijn om met je organisatie mee te groeien.
             </p>
-            <div className="hero-actions">
-              <a href="#werk" className="button button-primary">
-                Bekijk geselecteerd werk <ArrowRight size={18} />
+            <div className={styles.heroActions}>
+              <a href="#diensten" className={`${styles.button} ${styles.buttonPrimary}`}>
+                Bekijk de diensten <ArrowRight size={18} />
               </a>
-              <a href="#contact" className="button button-ghost">
-                Bespreek jouw idee
+              <a href="#contact" className={`${styles.button} ${styles.buttonSecondary}`}>
+                Bespreek je idee
               </a>
             </div>
-            <div className="hero-proof">
-              <div className="proof-mark">
-                <img src="/brand/dg-mark-reversed.svg" alt="" width="54" height="28" />
-              </div>
-              <p>
-                <strong>Eén partner.</strong>
-                <span>Van strategie en prototype tot bouw en doorontwikkeling.</span>
-              </p>
+            <div className={styles.heroPromise}>
+              <span><Check size={14} /> Persoonlijk contact</span>
+              <span><Check size={14} /> Van ontwerp tot beheer</span>
             </div>
           </div>
 
-          <div className="hero-stage hero-photo-stage" aria-label="Digitale producten op desktop, laptop, tablet en mobiel">
-            <div className="stage-aura" aria-hidden="true" />
-            <figure className="hero-photo-frame">
+          <div className={styles.heroVisual}>
+            <div className={styles.heroPhotoWrap}>
               <img
                 src="/assets/hero-digital-studio.png"
-                alt="Premium digitale productwerkplek met meerdere gekoppelde interfaces"
+                alt="Digitale interfaces op desktop, laptop, tablet en telefoon"
               />
-              <div className="hero-photo-shade" aria-hidden="true" />
-              <figcaption>
-                <span>Web · platform · mobiel</span>
-                <strong>Eén consistente productervaring.</strong>
-              </figcaption>
-            </figure>
-            <div className="hero-photo-card">
-              <div className="hero-photo-card-icon"><Workflow size={18} /></div>
-              <p><span>Van voor- tot achterkant</span><b>Ontwerp en techniek in één lijn</b></p>
-              <i><Check size={14} /></i>
+              <div className={styles.photoOverlay} aria-hidden="true" />
+              <div className={styles.photoCaption}>
+                <span>Van idee naar dagelijks gebruik</span>
+                <strong>Eén consistente ervaring.</strong>
+              </div>
             </div>
-            <div className="floating-badge floating-badge-one">
-              <Check size={16} />
-              <p><b>Flow actief</b><span>Alles gekoppeld</span></p>
+            <div className={styles.blueCard}>
+              <Workflow size={23} />
+              <p><span>De hele digitale flow</span><b>Voorkant en beheer in één lijn</b></p>
             </div>
-            <div className="floating-badge floating-badge-two">
-              <Braces size={17} />
-              <p><b>API status</b><span>Operationeel</span></p>
+            <div className={styles.statusCard}>
+              <span><CircleDot size={15} /> Betrouwbaar</span>
+              <strong>Ontworpen om verder te groeien.</strong>
+            </div>
+            <div className={styles.heroMark} aria-hidden="true">
+              <img src="/brand/dg-mark-reversed.svg" alt="" />
             </div>
           </div>
         </div>
-        <div className="hero-marquee" aria-label="Expertises">
+
+        <div className={styles.capabilityStrip} aria-label="Diensten">
           <div>
-            {["Websites", "SaaS platforms", "Klantportalen", "PWA’s", "API koppelingen", "Backoffices"].map((item) => (
-              <span key={item}>{item}<i>•</i></span>
-            ))}
-            {["Websites", "SaaS platforms", "Klantportalen", "PWA’s", "API koppelingen", "Backoffices"].map((item) => (
-              <span key={item + "-copy"} aria-hidden="true">{item}<i>•</i></span>
+            {[...capabilityLine, ...capabilityLine].map((item, index) => (
+              <span key={`${item}-${index}`}>{item}<i>✦</i></span>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="expertise" className="section services-section">
-        <div className="container">
-          <div className="section-heading split-heading">
+      <section className={styles.statement}>
+        <div className={styles.shell}>
+          <p className={styles.sectionIndex}>01 / WAT WE MAKEN</p>
+          <div className={styles.statementGrid}>
+            <h2>
+              Mooi aan de voorkant.
+              <span>Slim aan de achterkant.</span>
+            </h2>
             <div>
-              <p className="eyebrow"><span />Wat ik bouw</p>
-              <h2>Digitale slagkracht,<br />van buiten én van binnen.</h2>
+              <p>
+                Een sterke digitale oplossing voelt eenvoudig, juist omdat er
+                achter de schermen goed over iedere stap is nagedacht.
+              </p>
+              <a href="#mogelijkheden">Bekijk wat er mogelijk is <ArrowRight size={17} /></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="diensten" className={styles.servicesSection}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.kicker}><span /> Diensten</p>
+              <h2>Wat we voor je<br />kunnen bouwen.</h2>
             </div>
             <p>
-              Een sterke voorkant trekt aandacht. Een slim systeem erachter
-              bespaart tijd. DG Webservices brengt die twee werelden samen in
-              één product dat klopt.
+              Van een sterke website tot een complete digitale werkomgeving.
+              Kies een dienst om de mogelijkheden te bekijken.
             </p>
           </div>
-          <div className="services-list">
-            {services.map((service) => {
+
+          <div className={styles.serviceGrid}>
+            {services.map((service, index) => {
               const Icon = service.icon;
+              const toneClass = {
+                blue: styles.toneBlue,
+                navy: styles.toneNavy,
+                ice: styles.toneIce,
+                white: styles.toneWhite,
+              }[service.tone];
+              const sizeClass = [styles.service1, styles.service2, styles.service3, styles.service4, styles.service5, styles.service6, styles.service7, styles.service8][index];
               return (
-                <article className="service-row" key={service.number}>
-                  <span className="service-number">{service.number}</span>
-                  <div className="service-icon"><Icon /></div>
-                  <div className="service-copy">
+                <article className={`${styles.serviceCard} ${toneClass} ${sizeClass}`} key={service.id}>
+                  <button type="button" onClick={() => setSelectedService(service)} aria-label={`Bekijk dienst ${service.label}`}>
+                    <div className={styles.serviceTop}>
+                      <span>{service.number}</span>
+                      <div><Icon size={21} /></div>
+                    </div>
+                    <p className={styles.serviceLabel}>{service.label}</p>
                     <h3>{service.title}</h3>
-                    <p>{service.text}</p>
-                  </div>
-                  <div className="service-tags">
-                    {service.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                  </div>
-                  <ArrowUpRight className="service-arrow" />
+                    <p className={styles.serviceSummary}>{service.summary}</p>
+                    <div className={styles.serviceBottom}>
+                      <span>Bekijk mogelijkheden</span>
+                      <i><ArrowUpRight size={17} /></i>
+                    </div>
+                  </button>
                 </article>
               );
             })}
@@ -492,278 +388,226 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="werk" className="section work-section">
-        <div className="container">
-          <div className="section-heading work-heading">
+      <section id="mogelijkheden" className={styles.possibilitiesSection}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
             <div>
-              <p className="eyebrow eyebrow-light"><span />Geselecteerd werk</p>
-              <h2>Producten met een<br />eigen reden om te bestaan.</h2>
+              <p className={styles.kicker}><span /> Mogelijkheden</p>
+              <h2>Losse onderdelen.<br />Eén sterke flow.</h2>
             </div>
             <p>
-              Geen losse schermen om het mooi. Iedere oplossing begint bij een
-              echt proces, een duidelijke gebruiker en een concreet doel.
+              Iedere gebruiker ziet precies wat nodig is, terwijl informatie en
+              acties achter de schermen logisch met elkaar verbonden blijven.
             </p>
           </div>
 
-          <div className="work-toolbar">
-            <div className="filters" aria-label="Filter projecten">
-              {["Alles", "Platforms", "Websites", "Portals"].map((filter) => (
-                <button
-                  type="button"
-                  key={filter}
-                  className={activeFilter === filter ? "active" : ""}
-                  aria-pressed={activeFilter === filter}
-                  onClick={() => setActiveFilter(filter)}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-            <span>{filteredProjects.length.toString().padStart(2, "0")} projecten</span>
-          </div>
-
-          <div className="projects-grid">
-            {filteredProjects.map((project, index) => (
-              <article className={index % 3 === 0 ? "project-card project-card-wide" : "project-card"} key={project.id}>
-                <button type="button" onClick={() => setSelectedProject(project)} aria-label={"Bekijk case " + project.title}>
-                  <ProductPreview project={project} />
-                  <div className="project-meta">
-                    <div>
-                      <p>{project.label}</p>
-                      <h3>{project.title}</h3>
-                    </div>
-                    <span><ArrowUpRight /></span>
-                  </div>
-                  <p className="project-summary">{project.summary}</p>
-                  <div className="project-status"><i style={{ background: project.accent }} />{project.status}</div>
-                </button>
-              </article>
-            ))}
-          </div>
-
-          <article className="featured-sport">
-            <div className="featured-sport-image">
+          <article className={`${styles.feature} ${styles.featureSport}`}>
+            <div className={styles.featureImage}>
               <img
                 src="/assets/sports-platforms.png"
-                alt="Digitale wedstrijdregie in een voetbalclubhuis met zicht op het veld"
+                alt="Digitale wedstrijdinformatie en schermcommunicatie in een sportomgeving"
               />
-              <div className="featured-sport-tags" aria-label="Onderdelen">
-                <span>Live data</span>
-                <span>Wedstrijdregie</span>
-                <span>Narrowcasting</span>
+              <div className={styles.featureImageShade} aria-hidden="true" />
+              <div className={styles.imageTags}>
+                <span>Planning</span><span>Live informatie</span><span>Schermen</span>
               </div>
             </div>
-            <div className="featured-sport-copy">
-              <p className="eyebrow eyebrow-light"><span />Uitgelicht domein</p>
-              <h3>Sport als digitale proeftuin.</h3>
+            <div className={styles.featureCopy}>
+              <p className={styles.featureNumber}>01 / SPORT & EVENEMENTEN</p>
+              <h3>Alles rond planning, wedstrijd en locatie in één duidelijke flow.</h3>
               <p>
-                In VeyoCast en het Haaglanden Toernooiplatform komen live
-                informatie, verschillende rollen en tijdkritische communicatie
-                samen. Precies daar bewijst een helder productontwerp zijn
-                waarde.
+                Van inschrijving en planning tot uitslagen, meldingen en actuele
+                informatie op web, mobiel en gekoppelde schermen.
               </p>
-              <button type="button" onClick={() => setSelectedProject(projects[0])}>
-                Bekijk VeyoCast <ArrowUpRight size={17} />
-              </button>
+              <ul>
+                <li><Check size={15} /> Wedstrijd- en evenementbeheer</li>
+                <li><Check size={15} /> Eigen omgevingen per rol</li>
+                <li><Check size={15} /> Live standen en communicatie</li>
+                <li><Check size={15} /> Inschrijvingen en betalingen</li>
+              </ul>
+              <a href="#contact">Bespreek een oplossing <ArrowRight size={17} /></a>
+            </div>
+          </article>
+
+          <article className={`${styles.feature} ${styles.featureConnected}`}>
+            <div className={styles.featureCopy}>
+              <p className={styles.featureNumber}>02 / VERBONDEN ORGANISATIE</p>
+              <h3>De website is vaak pas het begin.</h3>
+              <p>
+                De echte winst ontstaat wanneer de voorkant, het klantportaal,
+                beheer, planning en communicatie dezelfde informatie gebruiken.
+              </p>
+              <ul>
+                <li><Check size={15} /> Minder dubbel en handmatig werk</li>
+                <li><Check size={15} /> Duidelijke rollen en statussen</li>
+                <li><Check size={15} /> Eén ervaring voor klant en medewerker</li>
+                <li><Check size={15} /> Klaar voor toekomstige uitbreiding</li>
+              </ul>
+              <a href="#contact">Vertel waar het vastloopt <ArrowRight size={17} /></a>
+            </div>
+            <div className={styles.featureImage}>
+              <img
+                src="/assets/connected-business.png"
+                alt="Portaal, backoffice en mobiele omgeving als één verbonden systeem"
+              />
+              <div className={styles.featureImageShade} aria-hidden="true" />
+              <div className={styles.connectedBadge}>
+                <Braces size={18} />
+                <span><small>Alles verbonden</small><b>Eén bron. Iedere omgeving actueel.</b></span>
+              </div>
             </div>
           </article>
         </div>
       </section>
 
-      <section className="section system-section">
-        <div className="container system-grid">
-          <div className="system-copy">
-            <p className="eyebrow"><span />Eén samenhangend systeem</p>
-            <h2>De website is vaak pas het begin.</h2>
+      <section id="werkwijze" className={styles.processSection}>
+        <div className={styles.shell}>
+          <div className={styles.processIntro}>
+            <p className={styles.kicker}><span /> Werkwijze</p>
+            <h2>Eerst zien.<br />Dan beslissen.</h2>
             <p>
-              De echte winst ontstaat wanneer de voorkant, backoffice,
-              betalingen, planning en communicatie dezelfde taal spreken.
-              Daarom ontwerp ik altijd met het complete proces in gedachten.
-            </p>
-            <ul>
-              {[
-                "Minder handmatig overtypen en losse lijstjes",
-                "Duidelijke rollen, statussen en verantwoordelijkheden",
-                "Een consistente ervaring voor klant én beheerder",
-                "Een technische basis die kan doorgroeien",
-              ].map((item) => (
-                <li key={item}><Check size={17} />{item}</li>
-              ))}
-            </ul>
-            <a href="#contact" className="text-link">Vertel waar het nu vastloopt <ArrowRight size={17} /></a>
-          </div>
-          <div className="system-image" aria-label="Klantportaal, planning, betalingen en beheer op gekoppelde apparaten">
-            <img
-              src="/assets/connected-business.png"
-              alt="Desktop, tablet en mobiel als één verbonden digitaal bedrijfssysteem"
-            />
-            <div className="system-image-overlay" aria-hidden="true" />
-            <div className="system-image-badge badge-portal"><Smartphone size={16} /><span>Klantportaal</span></div>
-            <div className="system-image-badge badge-flow"><Workflow size={16} /><span>Procesflow</span></div>
-            <div className="system-image-badge badge-api"><PlugZap size={16} /><span>Integraties</span></div>
-            <div className="system-image-caption">
-              <img src="/brand/dg-mark-reversed.svg" alt="" />
-              <p><span>Connected business</span><b>Alles werkt als één product.</b></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="werkwijze" className="section process-section">
-        <div className="container">
-          <div className="section-heading split-heading">
-            <div>
-              <p className="eyebrow"><span />Werkwijze</p>
-              <h2>Strak georganiseerd.<br />Ruimte om te ontdekken.</h2>
-            </div>
-            <p>
-              Geen maanden praten voordat je iets ziet. We maken ideeën snel
-              tastbaar, nemen gerichte beslissingen en bouwen daarna met focus
-              door.
+              Geen maanden praten voordat er iets te beoordelen is. We maken de
+              oplossing vroeg tastbaar en bouwen daarna gericht door.
             </p>
           </div>
-          <div className="process-grid">
-            {process.map((item, index) => (
-              <article key={item.step}>
-                <div className="process-top">
-                  <span>{item.step}</span>
-                  {index < process.length - 1 && <i />}
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
+          <div className={styles.processList}>
+            {process.map((item) => (
+              <article key={item.number}>
+                <span>{item.number}</span>
+                <div><h3>{item.title}</h3><p>{item.text}</p></div>
+                <ArrowUpRight size={19} />
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="over" className="section about-section">
-        <div className="container about-grid">
-          <div className="about-statement">
-            <p>“</p>
-            <h2>Ik bouw alsof ik straks zelf met het product moet werken.</h2>
+      <section id="over" className={styles.aboutSection}>
+        <div className={styles.aboutGlow} aria-hidden="true" />
+        <div className={`${styles.shell} ${styles.aboutGrid}`}>
+          <div className={styles.aboutMark}>
+            <img src="/brand/dg-mark-reversed.svg" alt="DG Webservices" />
           </div>
-          <div className="about-copy">
-            <p className="eyebrow eyebrow-light"><span />Persoonlijk betrokken</p>
-            <h3>Korte lijnen, eigenaarschap en een scherpe blik op wat beter kan.</h3>
+          <div className={styles.aboutCopy}>
+            <p className={styles.kicker}><span /> Persoonlijk betrokken</p>
+            <h2>Gebouwd alsof we er morgen zelf mee moeten werken.</h2>
             <p>
               DG Webservices combineert ontwerp, techniek en praktijkkennis.
-              Niet vanuit een ivoren toren, maar dicht op de organisatie en de
-              mensen die het product dagelijks gaan gebruiken.
+              Met korte lijnen, zichtbare voortgang en aandacht voor de mensen
+              die de oplossing dagelijks gaan gebruiken.
             </p>
-            <div className="about-points">
-              <span><Check />Direct contact</span>
-              <span><Check />Heldere keuzes</span>
-              <span><Check />Zichtbare voortgang</span>
-              <span><Check />Gebouwd om verder te groeien</span>
+            <div className={styles.aboutPoints}>
+              <span><Check size={15} /> Direct contact</span>
+              <span><Check size={15} /> Heldere keuzes</span>
+              <span><Check size={15} /> Zichtbare voortgang</span>
+              <span><Check size={15} /> Klaar om door te groeien</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" className="section contact-section">
-        <div className="contact-orb" aria-hidden="true" />
-        <div className="container contact-grid">
-          <div className="contact-copy">
-            <p className="eyebrow eyebrow-light"><span />Klaar voor de volgende stap?</p>
-            <h2>Laat zien waar je naartoe wilt. Dan maken we het concreet.</h2>
+      <section id="contact" className={styles.contactSection}>
+        <div className={styles.contactGridPattern} aria-hidden="true" />
+        <div className={`${styles.shell} ${styles.contactGrid}`}>
+          <div className={styles.contactCopy}>
+            <p className={styles.kicker}><span /> Een idee of proces dat beter kan?</p>
+            <h2>Laten we er iets werkbaars van maken.</h2>
             <p>
               Kies kort wat je voor ogen hebt. Je e-mail wordt alvast met de
-              juiste context voorbereid; jij voegt alleen nog de details toe.
+              juiste context voorbereid; jij voegt alleen de details toe.
             </p>
-            <div className="contact-location">
-              <span>DG</span>
-              <p><b>DG Webservices</b><small>Den Haag · werkt door heel Nederland</small></p>
+            <div className={styles.contactProof}>
+              <span><Check size={14} /> Persoonlijk contact</span>
+              <span><Check size={14} /> Heldere aanpak</span>
+              <span><Check size={14} /> Van ontwerp tot beheer</span>
             </div>
           </div>
-          <div className="project-starter">
-            <div className="starter-step">
+
+          <div className={styles.projectStarter}>
+            <div className={styles.starterStep}>
               <p><span>01</span>Wat wil je maken?</p>
-              <div className="choice-grid">
-                {["Een website", "Een platform", "Een portal", "Een koppeling"].map((choice) => (
+              <div className={styles.choiceGrid}>
+                {["Een website", "Een webapplicatie", "Een portaal", "Een koppeling"].map((choice) => (
                   <button
                     type="button"
                     key={choice}
-                    className={projectType === choice ? "active" : ""}
+                    className={projectType === choice ? styles.choiceActive : ""}
                     aria-pressed={projectType === choice}
                     onClick={() => setProjectType(choice)}
                   >
-                    {projectType === choice && <Check size={15} />}{choice}
+                    {projectType === choice && <Check size={14} />}{choice}
                   </button>
                 ))}
               </div>
             </div>
-            <div className="starter-step">
+            <div className={styles.starterStep}>
               <p><span>02</span>Wat moet het vooral opleveren?</p>
-              <div className="choice-grid">
-                {["Meer aanvragen", "Minder handwerk", "Meer overzicht", "Een nieuw product"].map((choice) => (
+              <div className={styles.choiceGrid}>
+                {["Meer aanvragen", "Minder handwerk", "Meer overzicht", "Een nieuwe dienst"].map((choice) => (
                   <button
                     type="button"
                     key={choice}
-                    className={projectGoal === choice ? "active" : ""}
+                    className={projectGoal === choice ? styles.choiceActive : ""}
                     aria-pressed={projectGoal === choice}
                     onClick={() => setProjectGoal(choice)}
                   >
-                    {projectGoal === choice && <Check size={15} />}{choice}
+                    {projectGoal === choice && <Check size={14} />}{choice}
                   </button>
                 ))}
               </div>
             </div>
-            <a className="starter-submit" href={mailHref}>
+            <a className={styles.starterSubmit} href={mailHref}>
               Start het gesprek <ArrowUpRight size={18} />
             </a>
-            <p className="starter-note">Opent jouw e-mail met deze keuzes alvast ingevuld.</p>
+            <p className={styles.starterNote}>Opent je e-mail met deze keuzes ingevuld.</p>
           </div>
         </div>
       </section>
 
-      <footer>
-        <div className="container footer-top">
-          <a href="#top" className="brand footer-brand" aria-label="Naar boven">
-            <img src="/brand/dg-mark-reversed.svg" alt="" width="72" height="39" />
-            <span>DG <strong>Webservices</strong></span>
+      <footer className={styles.footer}>
+        <div className={`${styles.shell} ${styles.footerTop}`}>
+          <a href="#top" className={styles.footerLogo} aria-label="Naar boven">
+            <img src="/brand/dg-lockup-reversed.svg" alt="DG Webservices" />
           </a>
-          <p>Websites. Platforms. Software.<br />Gebouwd om vooruit te bewegen.</p>
+          <p>Websites, portalen en webapplicaties.<br />Helder ontworpen. Zorgvuldig gebouwd.</p>
           <nav aria-label="Footernavigatie">
-            <a href="#expertise">Expertise</a>
-            <a href="#werk">Werk</a>
+            <a href="#diensten">Diensten</a>
+            <a href="#mogelijkheden">Mogelijkheden</a>
             <a href="#werkwijze">Werkwijze</a>
             <Link href="/brand">Merkconcept</Link>
             <a href="mailto:hello@dgwebservices.com">E-mail</a>
           </nav>
         </div>
-        <div className="container footer-bottom">
+        <div className={`${styles.shell} ${styles.footerBottom}`}>
           <span>© 2026 DG Webservices</span>
-          <span>Den Haag, Nederland</span>
+          <span>Den Haag · Nederland</span>
           <a href="mailto:hello@dgwebservices.com">hello@dgwebservices.com</a>
         </div>
       </footer>
 
-      <Dialog open={Boolean(selectedProject)} onOpenChange={(open) => !open && setSelectedProject(null)}>
-        <DialogContent className="case-dialog" showCloseButton>
-          {selectedProject && (
+      <Dialog open={Boolean(selectedService)} onOpenChange={(open) => !open && setSelectedService(null)}>
+        <DialogContent className={styles.serviceDialog} showCloseButton>
+          {selectedService && (
             <>
-              <ProductPreview project={selectedProject} />
-              <DialogHeader>
-                <div className="dialog-label">{selectedProject.label}<i style={{ background: selectedProject.accent }} /></div>
-                <DialogTitle>{selectedProject.title}</DialogTitle>
-                <DialogDescription>{selectedProject.summary}</DialogDescription>
+              <div className={styles.dialogVisual}>
+                <span>{selectedService.number}</span>
+                <selectedService.icon size={52} />
+                <i aria-hidden="true" />
+              </div>
+              <DialogHeader className={styles.dialogHeader}>
+                <p>{selectedService.label}</p>
+                <DialogTitle>{selectedService.title}</DialogTitle>
+                <DialogDescription>{selectedService.summary}</DialogDescription>
               </DialogHeader>
-              <div className="dialog-columns">
-                <div>
-                  <span>De uitdaging</span>
-                  <p>{selectedProject.challenge}</p>
-                </div>
-                <div>
-                  <span>De richting</span>
-                  <p>{selectedProject.solution}</p>
-                </div>
+              <div className={styles.dialogUseful}>
+                <span>Wanneer dit van waarde is</span>
+                <p>{selectedService.useful}</p>
               </div>
-              <div className="dialog-capabilities">
-                {selectedProject.capabilities.map((capability) => <span key={capability}>{capability}</span>)}
+              <div className={styles.dialogTags}>
+                {selectedService.tags.map((tag) => <span key={tag}>{tag}</span>)}
               </div>
-              <a href="#contact" className="dialog-cta" onClick={() => setSelectedProject(null)}>
-                Bespreek een vergelijkbaar idee <ArrowRight size={17} />
+              <a href="#contact" className={styles.dialogCta} onClick={() => setSelectedService(null)}>
+                Bespreek deze dienst <ArrowRight size={17} />
               </a>
             </>
           )}

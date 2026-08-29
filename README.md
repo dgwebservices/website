@@ -1,4 +1,30 @@
-# vinext-starter
+# DG Webservices — rebrandingprototype
+
+Een volledig werkend websiteprototype voor de nieuwe positionering van DG
+Webservices. De homepage presenteert uitsluitend diensten en functionele
+mogelijkheden; er worden geen klant- of productnamen gebruikt.
+
+## Inhoud
+
+- responsieve homepage in `app/page.tsx`
+- eigen visuele styling in `app/home.module.css`
+- interactief mobiel menu, dienstendetails en projectstarter
+- aparte merkpagina in `app/brand/page.tsx`
+- vectorlogo’s in `public/brand/`
+- beeldmateriaal in `public/assets/`
+
+## Lokaal starten
+
+Gebruik Node.js 22 of hoger.
+
+```bash
+npm install
+npm run dev
+```
+
+De productieversie wordt gebouwd met `npm run build`.
+
+## Technische basis
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
