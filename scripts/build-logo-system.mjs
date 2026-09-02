@@ -49,6 +49,10 @@ const reversedDefs = `<defs>
     <linearGradient id="dg-blue" x1="108" y1="2" x2="105" y2="83" gradientUnits="userSpaceOnUse"><stop stop-color="#5B97FF"/><stop offset=".5" stop-color="#3477F2"/><stop offset="1" stop-color="#1E5ED4"/></linearGradient>
   </defs>`;
 
+const iconDefs = `<defs>
+    <linearGradient id="dg-blue" x1="108" y1="2" x2="105" y2="83" gradientUnits="userSpaceOnUse"><stop stop-color="#5B97FF"/><stop offset=".5" stop-color="#3477F2"/><stop offset="1" stop-color="#1E5ED4"/></linearGradient>
+  </defs>`;
+
 const mark = (dFill, gFill, transform = "") => `<g${transform ? ` transform="${transform}"` : ""}>
     <path fill="${dFill}" d="${navyTop}"/>
     <path fill="${dFill}" d="${navyBottom}"/>
@@ -68,9 +72,9 @@ write("dg-mark-reversed.svg", svg("0 0 148 84", "DG Webservices beeldmerk voor d
 write("dg-mark-mono.svg", svg("0 0 148 84", "DG Webservices monochroom beeldmerk", mark("currentColor", "currentColor")));
 write("dg-mark-white.svg", svg("0 0 148 84", "DG Webservices wit beeldmerk", mark("#FFFFFF", "#FFFFFF")));
 
-write("dg-wordmark.svg", svg("0 6 544 64", "DG Webservices woordmerk", wordmark(NAVY, BLUE)));
-write("dg-wordmark-reversed.svg", svg("0 6 544 64", "DG Webservices woordmerk voor donkere achtergronden", wordmark(ICE, BLUE_LIGHT)));
-write("dg-wordmark-mono.svg", svg("0 6 544 64", "DG Webservices monochroom woordmerk", wordmark("currentColor", "currentColor")));
+write("dg-wordmark.svg", svg("0 4 544 64", "DG Webservices woordmerk", wordmark(NAVY, BLUE)));
+write("dg-wordmark-reversed.svg", svg("0 4 544 64", "DG Webservices woordmerk voor donkere achtergronden", wordmark(ICE, BLUE_LIGHT)));
+write("dg-wordmark-mono.svg", svg("0 4 544 64", "DG Webservices monochroom woordmerk", wordmark("currentColor", "currentColor")));
 
 const lockupPrimary = `${primaryDefs}\n  ${mark("url(#dg-navy)", "url(#dg-blue)", "translate(6 20)")}\n  <path fill="#CED9E6" d="M182 22h2v80h-2z"/>\n  ${wordmark(NAVY, BLUE, "translate(210 29) scale(.84)")}`;
 const lockupReversed = `${reversedDefs}\n  ${mark("url(#dg-light)", "url(#dg-blue)", "translate(6 20)")}\n  <path fill="#344966" d="M182 22h2v80h-2z"/>\n  ${wordmark(ICE, BLUE_LIGHT, "translate(210 29) scale(.84)")}`;
@@ -87,10 +91,10 @@ write("dg-lockup-stacked-reversed.svg", svg("0 0 420 204", "DG Webservices gesta
 
 const icon = (background, dFill, gFill, border = "", defs = "") => `${defs}\n  <rect x="4" y="4" width="120" height="120" rx="27" fill="${background}"${border}/>
   ${mark(dFill, gFill, "translate(14 35.5) scale(.676)")}`;
-write("dg-icon-navy.svg", svg("0 0 128 128", "DG Webservices donker app-icoon", icon(NAVY, "#FFFFFF", "url(#dg-blue)", "", reversedDefs)));
+write("dg-icon-navy.svg", svg("0 0 128 128", "DG Webservices donker app-icoon", icon(NAVY, "#FFFFFF", "url(#dg-blue)", "", iconDefs)));
 write("dg-icon-blue.svg", svg("0 0 128 128", "DG Webservices blauw app-icoon", icon(BLUE, "#FFFFFF", "#FFFFFF")));
 write("dg-icon-light.svg", svg("0 0 128 128", "DG Webservices licht app-icoon", icon("#FFFFFF", NAVY, BLUE, " stroke=\"#DCE5EF\" stroke-width=\"2\"")));
 
-write("../favicon.svg", svg("0 0 128 128", "DG Webservices", icon(NAVY, "#FFFFFF", "url(#dg-blue)", "", reversedDefs)));
+write("../favicon.svg", svg("0 0 128 128", "DG Webservices", icon(NAVY, "#FFFFFF", "url(#dg-blue)", "", iconDefs)));
 
 console.log(`Generated ${17} standalone vector assets in ${outDir}`);

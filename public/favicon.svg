@@ -2,7 +2,6 @@
   <title id="title">DG Webservices</title>
   <desc id="desc">Officieel vectorlogo van DG Webservices, opgebouwd uit schaalbare paden.</desc>
   <defs>
-    <linearGradient id="dg-light" x1="0" y1="0" x2="88" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#DFE9F7"/></linearGradient>
     <linearGradient id="dg-blue" x1="108" y1="2" x2="105" y2="83" gradientUnits="userSpaceOnUse"><stop stop-color="#5B97FF"/><stop offset=".5" stop-color="#3477F2"/><stop offset="1" stop-color="#1E5ED4"/></linearGradient>
   </defs>
   <rect x="4" y="4" width="120" height="120" rx="27" fill="#071426"/>
