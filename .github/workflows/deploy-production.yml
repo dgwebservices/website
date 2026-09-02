@@ -1,0 +1,93 @@
+name: Deploy production
+
+on:
+  push:
+    branches:
+      - production
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-dgwebservices
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy DG Webservices
+
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
+      - dg-sites
+      - production
+      - dgwebservices
+
+    timeout-minutes: 30
+
+    env:
+      NEXT_PUBLIC_SITE_URL: https://www.dgwebservices.nl
+      APP_ENVIRONMENT: production
+      APP_REVISION: ${{ github.sha }}
+
+      DG_RUNTIME_ENV_KEYS: >-
+        NEXT_PUBLIC_SITE_URL
+        APP_ENVIRONMENT
+        APP_REVISION
+
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          clean: true
+
+      - name: Verify production runner
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          test "$(id -un)" = "dgwebservices"
+          test "${RUNNER_NAME}" = "dg-sites-vps-01-dgwebservices-01"
+
+          case "${GITHUB_WORKSPACE}/" in
+            /srv/sites/dgwebservices/actions-runner/_work/*)
+              ;;
+            *)
+              echo "Wrong runner workspace"
+              exit 1
+              ;;
+          esac
+
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
+
+          echo "Runner boundary OK"
+
+      - name: Deploy production
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          /usr/local/bin/dg-site-deploy \
+            dgwebservices \
+            "${GITHUB_WORKSPACE}" \
+            "${GITHUB_SHA}" \
+            "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+      - name: Verify public website
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          curl \
+            -fsSL \
+            --retry 10 \
+            --retry-all-errors \
+            --retry-delay 2 \
+            https://www.dgwebservices.nl/ \
+            >/dev/null
+
+          echo "DG Webservices production OK"
