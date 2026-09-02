@@ -1,5 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 94" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 84" role="img" aria-labelledby="title desc">
   <title id="title">DG Webservices monochroom beeldmerk</title>
-  <path fill="currentColor" d="M7 8h60c31 0 53 14 65 38l-27 15C99 48 87 32 67 32H34v30h33c20 0 32-16 38-29l27 15C120 72 98 86 67 86H7V59h24V35H7V8Z"/>
-  <path fill="currentColor" d="M130 8h44l-13 25h-31c-11 0-20 5-25 14 5 9 14 15 25 15h14v-8h-21l12-22h39v54h-44c-25 0-45-16-52-39 7-23 27-39 52-39Z"/>
+  <desc id="desc">Officieel vectorlogo van DG Webservices, opgebouwd uit schaalbare paden.</desc>
+  <g>
+    <path fill="currentColor" d="M0 2h48c15.5 0 28.4 5.3 36 14.2L65 30c-4.7-8-10.8-13-19.7-13H0V2Z"/>
+    <path fill="currentColor" d="M0 27h18v37h29c9.4 0 15.4-4.3 19.2-10.8L82 69c-8.5 9.2-19.6 13-34 13H0V27Z"/>
+    <path fill="currentColor" d="M134 2h-34C80.8 2 67 19.6 67 42s17 40 38 40c24.7 0 43-16.4 43-40h-18c0 15.3-9.8 25-25 25-11.6 0-20-10.8-20-25s8.5-25 20-25h21L134 2Z"/>
+    <path fill="currentColor" d="M106 34h42v14h-48l6-14Z"/>
+  </g>
 </svg>

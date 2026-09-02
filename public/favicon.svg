@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112">
-  <defs><linearGradient id="b" x1="24" y1="90" x2="95" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#123FBF"/><stop offset="1" stop-color="#4A8BFF"/></linearGradient></defs>
-  <rect width="112" height="112" rx="27" fill="#071426"/>
-  <path fill="#fff" d="M15 25h31c17 0 30 8 36 21L67 55c-4-8-11-14-22-14H30v29h15c11 0 18-6 22-14l15 9C76 78 63 86 46 86H15V68h12V43H15V25Z"/>
-  <path fill="url(#b)" d="M75 25h28l-7 16H76c-6 0-11 3-14 8 3 6 8 9 14 9h9v-4H73l7-14h23v46H76c-16 0-28-10-32-24 4-22 17-37 31-37Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">DG Webservices</title>
+  <desc id="desc">Officieel vectorlogo van DG Webservices, opgebouwd uit schaalbare paden.</desc>
+  <defs>
+    <linearGradient id="dg-light" x1="0" y1="0" x2="88" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#DFE9F7"/></linearGradient>
+    <linearGradient id="dg-blue" x1="108" y1="2" x2="105" y2="83" gradientUnits="userSpaceOnUse"><stop stop-color="#5B97FF"/><stop offset=".5" stop-color="#3477F2"/><stop offset="1" stop-color="#1E5ED4"/></linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="27" fill="#071426"/>
+  <g transform="translate(14 35.5) scale(.676)">
+    <path fill="#FFFFFF" d="M0 2h48c15.5 0 28.4 5.3 36 14.2L65 30c-4.7-8-10.8-13-19.7-13H0V2Z"/>
+    <path fill="#FFFFFF" d="M0 27h18v37h29c9.4 0 15.4-4.3 19.2-10.8L82 69c-8.5 9.2-19.6 13-34 13H0V27Z"/>
+    <path fill="url(#dg-blue)" d="M134 2h-34C80.8 2 67 19.6 67 42s17 40 38 40c24.7 0 43-16.4 43-40h-18c0 15.3-9.8 25-25 25-11.6 0-20-10.8-20-25s8.5-25 20-25h21L134 2Z"/>
+    <path fill="url(#dg-blue)" d="M106 34h42v14h-48l6-14Z"/>
+  </g>
 </svg>

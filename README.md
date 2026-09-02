@@ -9,8 +9,9 @@ mogelijkheden; er worden geen klant- of productnamen gebruikt.
 - responsieve homepage in `app/page.tsx`
 - eigen visuele styling in `app/home.module.css`
 - interactief mobiel menu, dienstendetails en projectstarter
-- aparte merkpagina in `app/brand/page.tsx`
-- vectorlogo’s in `public/brand/`
+- aparte logo-systeempagina in `app/brand/page.tsx`
+- zelfstandig vectorlogo-systeem in `public/brand/`
+- reproduceerbare logo-opbouw via `scripts/build-logo-system.mjs`
 - beeldmateriaal in `public/assets/`
 
 ## Lokaal starten

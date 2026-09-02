@@ -1,129 +1,238 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Download } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, Download, X } from "lucide-react";
+import styles from "./brand.module.css";
 
 export const metadata: Metadata = {
-  title: "DG Webservices — Brand system",
+  title: "DG Webservices — Logo system",
   description:
-    "Het visuele en verbale merksysteem van DG Webservices: logo, kleur, typografie, fotografie en tone of voice.",
+    "Het complete vectorlogo-systeem van DG Webservices: beeldmerk, woordmerk, lock-ups, iconen en gebruiksregels.",
 };
 
-const colors = [
-  { name: "Deep Navy", hex: "#071426", color: "#071426" },
-  { name: "Cobalt Blue", hex: "#2563EB", color: "#2563EB" },
-  { name: "Cool Slate", hex: "#64748B", color: "#64748B" },
-  { name: "Ice White", hex: "#F5F8FC", color: "#F5F8FC" },
+const markVariants = [
+  {
+    title: "Primary gradient",
+    file: "dg-mark.svg",
+    src: "/brand/dg-mark.svg",
+    className: styles.lightPanel,
+  },
+  {
+    title: "Flat colour",
+    file: "dg-mark-flat.svg",
+    src: "/brand/dg-mark-flat.svg",
+    className: styles.lightPanel,
+  },
+  {
+    title: "Reversed",
+    file: "dg-mark-reversed.svg",
+    src: "/brand/dg-mark-reversed.svg",
+    className: styles.darkPanel,
+  },
+  {
+    title: "Monochrome",
+    file: "dg-mark-mono.svg",
+    src: "/brand/dg-mark-mono.svg",
+    className: styles.monoPanel,
+  },
 ];
 
-const imagery = [
+const wordmarkVariants = [
   {
-    src: "/assets/hero-digital-studio.png",
-    title: "Product als hoofdrolspeler",
-    text: "Tastbare apparatuur, heldere interfaces en gecontroleerd kobaltblauw licht.",
+    title: "Primair",
+    file: "dg-wordmark.svg",
+    src: "/brand/dg-wordmark.svg",
+    className: styles.wordmarkLight,
   },
   {
-    src: "/assets/sports-platforms.png",
-    title: "Geworteld in de praktijk",
-    text: "Echte context en herkenbare omgevingen; nooit steriel of onpersoonlijk.",
+    title: "Op donker",
+    file: "dg-wordmark-reversed.svg",
+    src: "/brand/dg-wordmark-reversed.svg",
+    className: styles.wordmarkDark,
   },
   {
-    src: "/assets/connected-business.png",
-    title: "Systemen in samenhang",
-    text: "Beeld laat zien dat voorkant, beheer en processen één geheel vormen.",
+    title: "Monochroom",
+    file: "dg-wordmark-mono.svg",
+    src: "/brand/dg-wordmark-mono.svg",
+    className: styles.wordmarkMono,
   },
 ];
+
+const iconVariants = [
+  { title: "Deep Navy", file: "dg-icon-navy.svg", src: "/brand/dg-icon-navy.svg" },
+  { title: "Cobalt Blue", file: "dg-icon-blue.svg", src: "/brand/dg-icon-blue.svg" },
+  { title: "Ice White", file: "dg-icon-light.svg", src: "/brand/dg-icon-light.svg" },
+];
+
+function DownloadLink({ file, children }: { file: string; children: React.ReactNode }) {
+  return (
+    <a href={`/brand/${file}`} download>
+      <Download size={15} /> {children}
+    </a>
+  );
+}
 
 export default function BrandPage() {
   return (
-    <main className="brand-page">
-      <section className="brand-guide-hero">
-        <header className="brand-guide-header">
-          <Link href="/" className="brand" aria-label="DG Webservices home">
-            <img src="/brand/dg-mark-reversed.svg" alt="" width="67" height="36" />
-            <span>DG <strong>Webservices</strong></span>
-          </Link>
-          <Link href="/" className="brand-back">
-            <ArrowLeft size={15} />
-            <span>Terug naar prototype</span>
-          </Link>
-        </header>
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <Link href="/" className={styles.headerBrand} aria-label="DG Webservices home">
+          <img src="/brand/dg-wordmark-reversed.svg" alt="DG Webservices" />
+        </Link>
+        <Link href="/" className={styles.backLink}>
+          <ArrowLeft size={16} /> Terug naar prototype
+        </Link>
+      </header>
 
-        <div className="container brand-guide-intro">
-          <div>
-            <p className="eyebrow eyebrow-light"><span />Brand system · 01</p>
-            <h1>Helder.<br /><span>Krachtig.</span><br />Verbonden.</h1>
+      <section className={styles.hero}>
+        <div className={styles.heroGrid} aria-hidden="true" />
+        <div className={`${styles.shell} ${styles.heroInner}`}>
+          <div className={styles.heroCopy}>
+            <p className={styles.kicker}><span /> DG logo system · 01</p>
+            <h1>Eén teken.<br /><em>Elke toepassing.</em></h1>
             <p>
-              Het nieuwe DG Webservices voelt technisch zonder afstandelijk te
-              worden. Diep marineblauw geeft rust en betrouwbaarheid; kobalt
-              brengt energie, beweging en digitale scherpte.
+              Het aangeleverde DG-monogram is opnieuw opgebouwd als een zuiver
+              vectorsysteem. De vorm blijft herkenbaar; de lijnen, verhoudingen
+              en kleurverlopen zijn nu consistent op ieder formaat.
             </p>
+            <div className={styles.heroActions}>
+              <a href="/downloads/DG_Webservices_Logo_System.zip" download>
+                Download compleet logopakket <Download size={17} />
+              </a>
+              <a href="#lockups">Bekijk alle varianten <ArrowUpRight size={17} /></a>
+            </div>
           </div>
-          <div className="brand-hero-mark">
-            <img src="/brand/dg-mark-reversed.svg" alt="DG Webservices monogram" />
+          <div className={styles.heroLogo}>
+            <div className={styles.heroLogoGrid} aria-hidden="true" />
+            <img src="/brand/dg-mark.svg" alt="DG Webservices beeldmerk" />
+            <span>Master artwork · SVG paths</span>
           </div>
         </div>
       </section>
 
-      <section className="brand-guide-section">
-        <div className="container">
-          <div className="brand-guide-heading">
-            <h2>Een herkenbaar teken.<br />Op ieder formaat.</h2>
+      <nav className={styles.subnav} aria-label="Logo-onderdelen">
+        <div className={styles.shell}>
+          <a href="#lockups">Lock-ups</a>
+          <a href="#mark">Beeldmerk</a>
+          <a href="#wordmark">Woordmerk</a>
+          <a href="#icons">Iconen</a>
+          <a href="#usage">Gebruik</a>
+        </div>
+      </nav>
+
+      <section id="lockups" className={styles.section}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.index}>01 / LOCK-UPS</p>
+              <h2>De complete handtekening.</h2>
+            </div>
             <p>
-              Het geometrische DG-monogram grijpt letterlijk in elkaar. De
-              letters delen vorm en ruimte, net zoals ontwerp en development in
-              het werk van DG Webservices één systeem vormen.
+              De horizontale combinatie is de standaard voor websites,
+              documenten en communicatie. De gestapelde versie werkt beter
+              wanneer de beschikbare ruimte compacter of vierkanter is.
             </p>
           </div>
-          <div className="logo-showcase">
-            <div className="logo-panel">
-              <img className="lockup" src="/brand/dg-lockup.svg" alt="Volledig DG Webservices logo" />
-              <div className="asset-actions">
-                <a href="/brand/dg-lockup.svg" download>
-                  <Download size={13} /> SVG lock-up
-                </a>
+
+          <div className={styles.lockupGrid}>
+            <article className={styles.lockupLight}>
+              <span>Primary / light background</span>
+              <img src="/brand/dg-lockup.svg" alt="Primair horizontaal DG Webservices logo" />
+              <div>
+                <DownloadLink file="dg-lockup.svg">Primary SVG</DownloadLink>
+                <DownloadLink file="dg-lockup-mono.svg">Mono SVG</DownloadLink>
               </div>
-            </div>
-            <div className="logo-panel dark">
-              <img className="mark" src="/brand/dg-mark-reversed.svg" alt="DG beeldmerk op donkerblauw" />
-              <div className="asset-actions">
-                <a href="/brand/dg-mark.svg" download>
-                  <Download size={13} /> SVG mark
-                </a>
-                <a href="/brand/dg-mark-mono.svg" download>
-                  <Download size={13} /> Mono
-                </a>
-                <a href="/brand/dg-mark-reversed.svg" download>
-                  <Download size={13} /> Reversed
-                </a>
+            </article>
+            <article className={styles.lockupDark}>
+              <span>Reversed / dark background</span>
+              <img src="/brand/dg-lockup-reversed.svg" alt="DG Webservices logo voor donkere achtergronden" />
+              <div>
+                <DownloadLink file="dg-lockup-reversed.svg">Reversed SVG</DownloadLink>
               </div>
-            </div>
+            </article>
+          </div>
+
+          <div className={styles.stackedGrid}>
+            <article>
+              <img src="/brand/dg-lockup-stacked.svg" alt="Gestapeld DG Webservices logo" />
+              <DownloadLink file="dg-lockup-stacked.svg">Stacked SVG</DownloadLink>
+            </article>
+            <article>
+              <img src="/brand/dg-lockup-stacked-reversed.svg" alt="Gestapeld DG Webservices logo op donker" />
+              <DownloadLink file="dg-lockup-stacked-reversed.svg">Stacked reversed SVG</DownloadLink>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="brand-guide-section">
-        <div className="container">
-          <div className="brand-guide-heading">
-            <h2>Rust in de basis.<br />Energie in het accent.</h2>
+      <section id="mark" className={`${styles.section} ${styles.iceSection}`}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.index}>02 / BEELDMERK</p>
+              <h2>Het DG-monogram.</h2>
+            </div>
             <p>
-              Deep Navy is het fundament. Cobalt Blue wordt doelgericht ingezet
-              voor acties, status en focus. Cool Slate draagt ondersteunende
-              tekst; Ice White houdt lange pagina’s licht en ruim.
+              Twee vormen grijpen in elkaar zonder hun eigen karakter te
+              verliezen. De open D en ronde G blijven ook op klein formaat
+              direct herkenbaar.
             </p>
           </div>
-          <div className="palette-grid">
-            {colors.map((item) => (
-              <article className="color-card" key={item.hex}>
-                <div
-                  className="color-swatch"
-                  style={{
-                    background: item.color,
-                    borderBottom: item.hex === "#F5F8FC" ? "1px solid #DDE5EF" : undefined,
-                  }}
-                />
+          <div className={styles.markGrid}>
+            {markVariants.map((variant) => (
+              <article className={variant.className} key={variant.file}>
+                <span>{variant.title}</span>
+                <img src={variant.src} alt={`${variant.title} DG-beeldmerk`} />
+                <DownloadLink file={variant.file}>{variant.file}</DownloadLink>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="wordmark" className={styles.section}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.index}>03 / WOORDMERK</p>
+              <h2>De naam als vast artwork.</h2>
+            </div>
+            <p>
+              Iedere letter is een vectorpad. Daardoor blijft het woordmerk
+              overal identiek en is er geen extern lettertype nodig om het
+              correct weer te geven of te laten drukken.
+            </p>
+          </div>
+          <div className={styles.wordmarkList}>
+            {wordmarkVariants.map((variant) => (
+              <article className={variant.className} key={variant.file}>
+                <span>{variant.title}</span>
+                <img src={variant.src} alt={`${variant.title} DG Webservices woordmerk`} />
+                <DownloadLink file={variant.file}>Download SVG</DownloadLink>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="icons" className={`${styles.section} ${styles.darkSection}`}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.index}>04 / ICONEN</p>
+              <h2>Compact en herkenbaar.</h2>
+            </div>
+            <p>
+              Voor app-iconen, profielafbeeldingen en kleine digitale
+              toepassingen staat het monogram in een vaste afgeronde tegel.
+            </p>
+          </div>
+          <div className={styles.iconGrid}>
+            {iconVariants.map((variant) => (
+              <article key={variant.file}>
+                <img src={variant.src} alt={`${variant.title} DG-app-icoon`} />
                 <div>
-                  <strong>{item.name}</strong>
-                  <span>{item.hex}</span>
+                  <strong>{variant.title}</strong>
+                  <DownloadLink file={variant.file}>SVG downloaden</DownloadLink>
                 </div>
               </article>
             ))}
@@ -131,96 +240,66 @@ export default function BrandPage() {
         </div>
       </section>
 
-      <section className="brand-guide-section">
-        <div className="container">
-          <div className="brand-guide-heading">
-            <h2>Technisch precies.<br />Menselijk leesbaar.</h2>
+      <section id="usage" className={`${styles.section} ${styles.usageSection}`}>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.index}>05 / GEBRUIK</p>
+              <h2>Rust rondom het merk.</h2>
+            </div>
             <p>
-              Space Grotesk geeft headlines een uitgesproken, digitale
-              signatuur. Manrope houdt navigatie, uitleg en interfaces compact
-              en prettig leesbaar op ieder scherm.
+              Voldoende vrije ruimte en de juiste variant zorgen dat het logo
+              zelfverzekerd blijft, van favicon tot grootformaat drukwerk.
             </p>
           </div>
-          <div className="type-grid">
-            <article className="type-card display">
-              <span>Display · Space Grotesk</span>
-              <h3>Aa 01</h3>
-              <p>Voor sterke koppen, statements en productnamen. Compact, geometrisch en zelfverzekerd.</p>
+
+          <div className={styles.usageGrid}>
+            <article className={styles.clearspaceCard}>
+              <span>Minimale vrije ruimte</span>
+              <div className={styles.clearspaceVisual}>
+                <i className={styles.measureTop}>X</i>
+                <i className={styles.measureLeft}>X</i>
+                <img src="/brand/dg-mark.svg" alt="Vrije ruimte rondom het DG-beeldmerk" />
+              </div>
+              <p>Houd rondom het logo minimaal één verticale D-stam vrij.</p>
             </article>
-            <article className="type-card body">
-              <span>Interface · Manrope</span>
-              <h3>Aa 01</h3>
-              <p>Voor bodycopy, navigatie, labels en digitale interfaces. Neutraal waar het moet, karaktervol waar het kan.</p>
+            <article className={styles.sizeCard}>
+              <span>Minimale formaten</span>
+              <div>
+                <figure><img src="/brand/dg-lockup.svg" alt="" /><figcaption>180 px digitaal</figcaption></figure>
+                <figure><img src="/brand/dg-mark.svg" alt="" /><figcaption>48 px digitaal</figcaption></figure>
+                <figure><img src="/brand/dg-icon-navy.svg" alt="" /><figcaption>16–32 px digitaal</figcaption></figure>
+              </div>
+            </article>
+          </div>
+
+          <div className={styles.rulesGrid}>
+            <article>
+              <Check size={18} />
+              <h3>Wel doen</h3>
+              <p>Gebruik de meegeleverde compositie en kies de variant met voldoende contrast.</p>
+            </article>
+            <article className={styles.dontCard}>
+              <X size={18} />
+              <h3>Niet vervormen</h3>
+              <p>Verander de verhoudingen, onderlinge afstand of plaatsing van de onderdelen niet.</p>
+            </article>
+            <article className={styles.dontCard}>
+              <X size={18} />
+              <h3>Geen eigen kleuren</h3>
+              <p>Gebruik alleen primary, reversed, flat, wit of monochroom uit het pakket.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section className="brand-guide-section">
-        <div className="container">
-          <div className="brand-guide-heading">
-            <h2>Beeld dat laat voelen<br />wat er wordt gebouwd.</h2>
-            <p>
-              De beeldtaal is premium, geloofwaardig en functioneel. Producten
-              staan in een echte context, materialen blijven tastbaar en
-              kobaltblauw verbindt de serie zonder alles blauw te maken.
-            </p>
-          </div>
-          <div className="imagery-grid">
-            {imagery.map((item) => (
-              <article className="imagery-card" key={item.src}>
-                <img src={item.src} alt={item.title} />
-                <div>
-                  <strong>{item.title}</strong>
-                  <span>{item.text}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="brand-guide-section">
-        <div className="container">
-          <div className="brand-guide-heading">
-            <h2>Een stem zonder ruis.</h2>
-            <p>
-              DG Webservices schrijft kalm, concreet en ondernemend. Geen grote
-              beloften zonder bewijs, geen techniek om indruk te maken en geen
-              ingewikkelde taal wanneer het ook helder kan.
-            </p>
-          </div>
-          <div className="voice-grid">
-            <article className="voice-card">
-              <span>01 · Helder</span>
-              <h3>Complexe techniek. Helder in gebruik.</h3>
-              <p>Korte zinnen, één boodschap per alinea en altijd vanuit de gebruiker geschreven.</p>
-            </article>
-            <article className="voice-card">
-              <span>02 · Concreet</span>
-              <h3>Laat zien wat het product mogelijk maakt.</h3>
-              <p>Processen, rollen en functies zijn sterker bewijs dan algemene superlatieven.</p>
-            </article>
-            <article className="voice-card">
-              <span>03 · Betrokken</span>
-              <h3>Een partner die naast de organisatie staat.</h3>
-              <p>Direct, persoonlijk en praktisch; met ruimte om samen de beste richting te vinden.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <footer className="brand-guide-footer">
-        <div className="container">
-          <p>DG Webservices · Brand system 01 · 2026</p>
-          <div className="brand-footer-actions">
-            <a href="/downloads/DG_Webservices_Brand_Assets.zip" download>
-              Download merkpakket <Download size={15} />
-            </a>
-            <Link href="/">
-              Bekijk het prototype <ArrowUpRight size={15} />
-            </Link>
-          </div>
+      <footer className={styles.footer}>
+        <div className={styles.shell}>
+          <img src="/brand/dg-lockup-reversed.svg" alt="DG Webservices" />
+          <p>Beeldmerk, woordmerk en iconen als zelfstandig vectorartwork.</p>
+          <a href="/downloads/DG_Webservices_Logo_System.zip" download>
+            Download logopakket <Download size={16} />
+          </a>
         </div>
       </footer>
     </main>

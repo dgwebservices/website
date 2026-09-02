@@ -1,17 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 94" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 84" role="img" aria-labelledby="title desc">
   <title id="title">DG Webservices beeldmerk voor donkere achtergronden</title>
-  <desc id="desc">Geometrisch DG-monogram in ijswit en kobaltblauw.</desc>
+  <desc id="desc">Officieel vectorlogo van DG Webservices, opgebouwd uit schaalbare paden.</desc>
   <defs>
-    <linearGradient id="light" x1="8" y1="8" x2="132" y2="86" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#DCE8F8"/>
-    </linearGradient>
-    <linearGradient id="blue" x1="78" y1="82" x2="174" y2="8" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#123FBF"/>
-      <stop offset=".52" stop-color="#2563EB"/>
-      <stop offset="1" stop-color="#5B97FF"/>
-    </linearGradient>
+    <linearGradient id="dg-light" x1="0" y1="0" x2="88" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#DFE9F7"/></linearGradient>
+    <linearGradient id="dg-blue" x1="108" y1="2" x2="105" y2="83" gradientUnits="userSpaceOnUse"><stop stop-color="#5B97FF"/><stop offset=".5" stop-color="#3477F2"/><stop offset="1" stop-color="#1E5ED4"/></linearGradient>
   </defs>
-  <path fill="url(#light)" d="M7 8h60c31 0 53 14 65 38l-27 15C99 48 87 32 67 32H34v30h33c20 0 32-16 38-29l27 15C120 72 98 86 67 86H7V59h24V35H7V8Z"/>
-  <path fill="url(#blue)" d="M130 8h44l-13 25h-31c-11 0-20 5-25 14 5 9 14 15 25 15h14v-8h-21l12-22h39v54h-44c-25 0-45-16-52-39 7-23 27-39 52-39Z"/>
+  <g>
+    <path fill="url(#dg-light)" d="M0 2h48c15.5 0 28.4 5.3 36 14.2L65 30c-4.7-8-10.8-13-19.7-13H0V2Z"/>
+    <path fill="url(#dg-light)" d="M0 27h18v37h29c9.4 0 15.4-4.3 19.2-10.8L82 69c-8.5 9.2-19.6 13-34 13H0V27Z"/>
+    <path fill="url(#dg-blue)" d="M134 2h-34C80.8 2 67 19.6 67 42s17 40 38 40c24.7 0 43-16.4 43-40h-18c0 15.3-9.8 25-25 25-11.6 0-20-10.8-20-25s8.5-25 20-25h21L134 2Z"/>
+    <path fill="url(#dg-blue)" d="M106 34h42v14h-48l6-14Z"/>
+  </g>
 </svg>
