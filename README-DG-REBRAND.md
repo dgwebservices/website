@@ -15,7 +15,7 @@ Dit pakket bevat het volledige, responsieve prototype van de nieuwe DG Webservic
 ## Routes
 
 - / — volledig homepage- en dienstenprototype.
-- /brand — complete presentatie van beeldmerk, woordmerk, lock-ups, iconen en gebruiksregels.
+- /brand — presentatie van de vier officiële light- en darkmode-SVG’s en hun gebruiksregels.
 
 ## Werkende onderdelen
 
@@ -37,17 +37,19 @@ slimme flows, schermcommunicatie en beheer.
 
 ## Merkmiddelen
 
-De map `public/brand` bevat een volledig zelfstandig vectorsysteem:
+De map `public/brand` bevat uitsluitend de vier aangeleverde officiële
+masterbestanden:
 
-- primaire, vlakke, reversed, monochrome en witte beeldmerken;
-- primaire, reversed en monochrome woordmerken als outlines;
-- horizontale en gestapelde lock-ups;
-- drie afgeronde iconvarianten;
+- gecombineerd logo voor lichte achtergronden;
+- gecombineerd logo voor donkere achtergronden;
+- los beeldmerk voor lichte achtergronden;
+- los beeldmerk voor donkere achtergronden;
 - gebruiksrichtlijnen in `public/brand/README.md`.
 
-Alle bestanden bestaan uit schaalbare vectorpaden en bevatten geen live tekst,
-ingesloten rasterafbeeldingen of externe lettertype-afhankelijkheden. Het pakket
-kan opnieuw worden opgebouwd met `node scripts/build-logo-system.mjs`.
+Alle bestanden bestaan uit schaalbare vectorpaden en bevatten een transparante
+achtergrond, geen live tekst, geen rasterafbeeldingen en geen externe
+lettertype-afhankelijkheden. De paden en de ruimte tussen D en G worden in het
+prototype ongewijzigd gebruikt.
 
 De map public/assets bevat de drie finale fotografie-assets.
 

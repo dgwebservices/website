@@ -1,44 +1,28 @@
-# DG Webservices — logo system
+# DG Webservices — officiële SVG-set
 
-Alle SVG-bestanden zijn volledig zelfstandig en bestaan uitsluitend uit
-vectorpaden. Het woordmerk is omgezet naar outlines en heeft daarom geen
-geïnstalleerd lettertype nodig.
+Deze map bevat uitsluitend de vier aangeleverde officiële masterbestanden. De
+SVG’s hebben een transparante achtergrond en bestaan volledig uit vectorpaden:
+geen rasterafbeeldingen, live tekst, scripts of externe lettertypen.
 
-## Beeldmerk
+## Gecombineerd logo
 
-- `dg-mark.svg` — primaire kleurvariant met het officiële kleurverloop
-- `dg-mark-flat.svg` — vlakke tweekleurenvariant voor drukwerk en borduring
-- `dg-mark-reversed.svg` — kleurvariant voor donkere achtergronden
-- `dg-mark-mono.svg` — monochrome variant via `currentColor`
-- `dg-mark-white.svg` — volledig witte variant
+- `DG-Webservices-Combined-Light-Mode-8192-1.svg` — navy en cobalt, voor lichte achtergronden
+- `DG-Webservices-Combined-Dark-Mode-8192.svg` — wit en helderblauw, voor donkere achtergronden
 
-## Woordmerk
+## Los beeldmerk
 
-- `dg-wordmark.svg` — primair woordmerk
-- `dg-wordmark-reversed.svg` — woordmerk voor donkere achtergronden
-- `dg-wordmark-mono.svg` — monochroom woordmerk via `currentColor`
-
-## Lock-ups
-
-- `dg-lockup.svg` — primaire horizontale combinatie
-- `dg-lockup-reversed.svg` — horizontale combinatie op donker
-- `dg-lockup-mono.svg` — monochrome horizontale combinatie
-- `dg-lockup-stacked.svg` — compacte gestapelde combinatie
-- `dg-lockup-stacked-reversed.svg` — gestapelde combinatie op donker
-
-## Iconen
-
-- `dg-icon-navy.svg` — primair app- en profielicoon
-- `dg-icon-blue.svg` — witte monogramvariant op kobaltblauw
-- `dg-icon-light.svg` — kleurvariant op een lichte tegel
+- `DG-Webservices-Icon-Light-Mode-8192.svg` — navy en cobalt, voor lichte achtergronden
+- `DG-Webservices-Icon-Dark-Mode-8192.svg` — wit en helderblauw, voor donkere achtergronden
 
 ## Gebruik
 
-- Gebruik de horizontale lock-up vanaf 180 px breed.
-- Gebruik het losse beeldmerk vanaf 48 px breed.
-- Gebruik voor formaten onder 32 px het donkere app-icoon of `favicon.svg`.
-- Houd rondom het logo minimaal de hoogte van de linker verticale D-stam vrij.
-- Vervorm, roteer of herschik de onderdelen niet.
-- Gebruik op foto’s altijd een variant met voldoende contrast.
+- Kies altijd de variant met voldoende contrast ten opzichte van de achtergrond.
+- Houd de onderlinge afstand tussen D en G exact zoals in het masterbestand.
+- Vervorm, roteer, herschik of recolor de paden niet.
+- Houd rondom het logo minimaal één verticale D-stam vrij.
+- De transparante ruimte in de vierkante iconbestanden geeft een ruime veilige marge voor ronde en vierkante uitsnedes.
+- SVG is resolutie-onafhankelijk en kan zonder kwaliteitsverlies naar 8K en groter worden geschaald.
 
-Kleuren: Deep Navy `#071426`, Cobalt Blue `#2563EB`, Ice White `#F5F8FC`.
+Let op: de witte scheidingslijn van de gecombineerde Light Mode-variant wordt
+op zuiver wit nauwelijks zichtbaar. Gebruik bij voorkeur een lichtgrijs of
+Ice White vlak wanneer de scheidingslijn zichtbaar moet blijven.

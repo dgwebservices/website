@@ -216,7 +216,12 @@ export default function Home() {
       <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
         <div className={styles.headerInner}>
           <a href="#top" className={styles.logo} aria-label="DG Webservices home" onClick={closeMenu}>
-            <img src="/brand/dg-lockup.svg" alt="DG Webservices" width="230" height="55" />
+            <img
+              src="/brand/DG-Webservices-Combined-Light-Mode-8192-1.svg"
+              alt="DG Webservices"
+              width="230"
+              height="58"
+            />
           </a>
 
           <nav className={styles.desktopNav} aria-label="Hoofdnavigatie">
@@ -310,7 +315,7 @@ export default function Home() {
               <strong>Ontworpen om verder te groeien.</strong>
             </div>
             <div className={styles.heroMark} aria-hidden="true">
-              <img src="/brand/dg-mark-reversed.svg" alt="" />
+              <img src="/brand/DG-Webservices-Icon-Dark-Mode-8192.svg" alt="" />
             </div>
           </div>
         </div>
@@ -486,7 +491,7 @@ export default function Home() {
         <div className={styles.aboutGlow} aria-hidden="true" />
         <div className={`${styles.shell} ${styles.aboutGrid}`}>
           <div className={styles.aboutMark}>
-            <img src="/brand/dg-mark-reversed.svg" alt="DG Webservices" />
+            <img src="/brand/DG-Webservices-Icon-Dark-Mode-8192.svg" alt="DG Webservices" />
           </div>
           <div className={styles.aboutCopy}>
             <p className={styles.kicker}><span /> Persoonlijk betrokken</p>
@@ -567,7 +572,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div className={`${styles.shell} ${styles.footerTop}`}>
           <a href="#top" className={styles.footerLogo} aria-label="Naar boven">
-            <img src="/brand/dg-lockup-reversed.svg" alt="DG Webservices" />
+            <img src="/brand/DG-Webservices-Combined-Dark-Mode-8192.svg" alt="DG Webservices" />
           </a>
           <p>Websites, portalen en webapplicaties.<br />Helder ontworpen. Zorgvuldig gebouwd.</p>
           <nav aria-label="Footernavigatie">
