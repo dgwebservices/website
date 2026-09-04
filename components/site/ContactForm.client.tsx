@@ -1,12 +1,14 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { primaryGoalLabels, primaryGoals, projectTypeLabels, projectTypes } from "@/lib/contact-schema";
 import { siteConfig } from "@/content/site";
 
 type FormErrors = Record<string, string[]>;
 
 export function ContactForm({ initialProject, initialGoal }: { initialProject?: string; initialGoal?: string }) {
+  const router = useRouter();
   const startedAt = useRef(0);
   const idempotencyKey = useRef("");
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
@@ -32,7 +34,7 @@ export function ContactForm({ initialProject, initialGoal }: { initialProject?: 
       const response = await fetch("/api/contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
       const body = await response.json() as { message?: string; errors?: FormErrors };
       if (response.ok) {
-        window.location.assign("/bedankt");
+        router.push("/bedankt");
         return;
       }
       setErrors(body.errors ?? {});
