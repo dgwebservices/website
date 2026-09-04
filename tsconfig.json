@@ -32,5 +32,16 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "build", "dist", "outputs", "test-results", "examples"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "outputs",
+    "test-results",
+    "examples",
+    "e2e",
+    "tests",
+    "drizzle.config.ts",
+    "playwright.config.ts"
+  ]
 }
