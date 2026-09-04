@@ -27,6 +27,7 @@ test("publishes exactly eight valid, mutually linked services", async () => {
 
 test("contact schema normalizes valid data and rejects unknown keys", async () => {
   const { contactSchema } = await vite.ssrLoadModule("/lib/contact-schema.ts");
+  const { allowedOrigin } = await vite.ssrLoadModule("/lib/contact-security.ts");
   const base = { name: "  Test Persoon  ", organisation: "", email: "TEST@EXAMPLE.COM", phone: "", projectType: "website", primaryGoal: "meer-aanvragen", message: "Dit is een veilige testaanvraag zonder echte persoonsgegevens.", privacyAccepted: true, website: "", startedAt: Date.now() - 5000, idempotencyKey: crypto.randomUUID() };
   const parsed = contactSchema.parse(base);
   assert.equal(parsed.name, "Test Persoon");
@@ -34,6 +35,8 @@ test("contact schema normalizes valid data and rejects unknown keys", async () =
   assert.equal(contactSchema.safeParse({ ...base, unexpected: "field" }).success, false);
   assert.equal(contactSchema.safeParse({ ...base, message: "te kort" }).success, false);
   assert.equal(contactSchema.safeParse({ ...base, privacyAccepted: false }).success, false);
+  const proxiedRequest = new Request("http://127.0.0.1:3109/api/contact", { headers: { origin: "https://www.dgwebservices.nl" } });
+  assert.equal(allowedOrigin(proxiedRequest, "https://www.dgwebservices.nl"), true);
 });
 
 test("official logo masters retain their exact hashes", async () => {

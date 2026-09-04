@@ -13,6 +13,7 @@ export function allowedOrigin(request: Request, canonicalOrigin: string) {
     const parsed = new URL(origin);
     const requestUrl = new URL(request.url);
     const canonical = new URL(canonicalOrigin);
+    if (parsed.origin === canonical.origin && parsed.protocol === "https:") return true;
     if (parsed.origin === requestUrl.origin && parsed.protocol === "https:") return true;
     return parsed.hostname === "localhost" && requestUrl.hostname === "localhost" && canonical.hostname !== "localhost";
   } catch {
