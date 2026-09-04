@@ -1,0 +1,17 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ContactCallout, PageHero } from "@/components/site/PageHero";
+import { BrandLogo } from "@/components/site/BrandLogo";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({ title: "Over DG Webservices | Digitale diensten uit Den Haag", description: "Maak kennis met DG Webservices: digitale diensten vanuit Den Haag, met aandacht voor heldere samenwerking en duurzaam beheer.", path: "/over" });
+
+export default function AboutPage() {
+  return <main id="main-content">
+    <PageHero eyebrow="Over DG Webservices" title="Digitaal werk, helder aangepakt." lead="DG Webservices ontwerpt en bouwt digitale oplossingen vanuit Den Haag, met aandacht voor de voorkant én het dagelijkse werk erachter." primary={{ href: "/contact", label: "Maak kennis" }} secondary={{ href: "/werkwijze", label: "Bekijk de werkwijze" }} />
+    <section className="section"><div className="container about-intro"><div><span className="eyebrow">Ontwerp, techniek en gebruik</span><h2>Eén lijn van eerste vraag tot beheer.</h2></div><div><p className="large-copy">Een digitale oplossing is pas sterk wanneer bezoekers hun taak begrijpen, medewerkers overzicht houden en de omgeving na oplevering beheersbaar blijft.</p><p>Daarom worden structuur, interactie, techniek en dagelijkse uitzonderingen niet als losse disciplines behandeld. Keuzes worden vroeg zichtbaar en pas gebouwd wanneer hun functie helder is.</p></div></div></section>
+    <section className="section section-ice"><div className="container principle-layout"><div className="brand-tile"><BrandLogo kind="icon" surface="light" decorative /><span>DG Webservices<br />Den Haag, Nederland</span></div><div><span className="eyebrow">Principes</span><h2>Helder, betrokken, precies en ondernemend.</h2><div className="principles-list"><article><h3>Helder</h3><p>Complexiteit wordt geordend tot keuzes die inhoudelijk en technisch te volgen zijn.</p></article><article><h3>Betrokken</h3><p>De dagelijkse praktijk en bereikbare communicatie blijven onderdeel van het project.</p></article><article><h3>Precies</h3><p>States, uitzonderingen, toegankelijkheid en beheer krijgen net zo veel aandacht als de eerste indruk.</p></article><article><h3>Ondernemend</h3><p>Er wordt gezocht naar een werkbare stap die waarde toevoegt zonder onnodige omvang.</p></article></div></div></div></section>
+    <section className="section section-dark"><div className="container two-column-section"><div><span className="eyebrow eyebrow-light">Waar DG sterk in is</span><h2>De verbinding tussen interface en proces.</h2><p>Van positionering en contentstructuur tot workflows, koppelingen en beheer: de gebruiker en de verwerking erachter blijven in dezelfde lijn.</p><Link className="text-link-light" href="/diensten">Bekijk de acht diensten <span aria-hidden="true">→</span></Link></div><div><span className="eyebrow eyebrow-light">Aanvullende expertise</span><h2>Open over wat extra aandacht vraagt.</h2><p>Wanneer een project aanvullende specialistische kennis nodig heeft, wordt dat vroeg benoemd en als duidelijke afhankelijkheid georganiseerd. Er worden geen fictieve vaste afdelingen of teams voorgesteld.</p></div></div></section>
+    <ContactCallout title="Maak kennis met de aanpak." text="Vertel waar je organisatie digitaal tegenaan loopt. We kijken eerst naar de vraag, daarna pas naar de vorm." label="Maak kennis" />
+  </main>;
+}

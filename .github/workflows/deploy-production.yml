@@ -30,11 +30,13 @@ jobs:
     env:
       NEXT_PUBLIC_SITE_URL: https://www.dgwebservices.nl
       APP_ENVIRONMENT: production
+      ALLOW_INDEXING: "false"
       APP_REVISION: ${{ github.sha }}
 
       DG_RUNTIME_ENV_KEYS: >-
         NEXT_PUBLIC_SITE_URL
         APP_ENVIRONMENT
+        ALLOW_INDEXING
         APP_REVISION
 
     steps:

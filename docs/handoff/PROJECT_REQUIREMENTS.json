@@ -1,0 +1,132 @@
+{
+  "project": {
+    "name": "DG Webservices",
+    "locale": "nl-NL",
+    "handoffVersion": "1.0",
+    "handoffDate": "2026-09-03",
+    "prototypeUrl": "https://dg-webservices-rebrand.famgoldenbelt.chatgpt.site",
+    "sourceCommit": "2633ec9911882325695dadff3cbb763f1b332170",
+    "sourceArchive": "source/DG_Webservices_Current_Prototype_Source.zip"
+  },
+  "messages": {
+    "primary": "Digitaal gemaakt. Helder geregeld.",
+    "secondary": "Mooi aan de voorkant. Slim aan de achterkant."
+  },
+  "nonNegotiables": [
+    "Gebruik uitsluitend de vier officiële SVG-masters als logobron.",
+    "Behoud vorm, kleur, verhouding en negatieve ruimte tussen D en G exact.",
+    "Vermeld publiek nergens hoe tekst, beeld of prototype tot stand kwam.",
+    "Gebruik geen klant-, product- of technologiemerken als portfolio- of marketingitem.",
+    "Verzin geen cases, testimonials, cijfers, awards, bedrijfsgegevens of juridische feiten.",
+    "Ontbrekende feiten zijn launch blockers en komen niet als publieke placeholder live.",
+    "Alle kerncontent is server-rendered of statisch gegenereerd.",
+    "Staging en prototype zijn afgeschermd en noindex.",
+    "Cases en kennisbank worden alleen geactiveerd met echte goedgekeurde inhoud."
+  ],
+  "services": [
+    { "order": 1, "name": "Websites", "slug": "websites" },
+    { "order": 2, "name": "Webapplicaties", "slug": "webapplicaties" },
+    { "order": 3, "name": "Portalen", "slug": "portalen" },
+    { "order": 4, "name": "Backoffice", "slug": "backoffice" },
+    { "order": 5, "name": "Koppelingen", "slug": "koppelingen" },
+    { "order": 6, "name": "Slimme flows", "slug": "slimme-flows" },
+    { "order": 7, "name": "Schermcommunicatie", "slug": "schermcommunicatie" },
+    { "order": 8, "name": "Beheer en groei", "slug": "beheer-en-groei" }
+  ],
+  "process": [
+    "Scherpstellen",
+    "Ervaarbaar maken",
+    "Bouwen",
+    "Verder brengen"
+  ],
+  "phase1Routes": [
+    "/",
+    "/diensten",
+    "/diensten/websites",
+    "/diensten/webapplicaties",
+    "/diensten/portalen",
+    "/diensten/backoffice",
+    "/diensten/koppelingen",
+    "/diensten/slimme-flows",
+    "/diensten/schermcommunicatie",
+    "/diensten/beheer-en-groei",
+    "/mogelijkheden",
+    "/werkwijze",
+    "/over",
+    "/contact",
+    "/bedankt",
+    "/brand"
+  ],
+  "conditionalRoutes": [
+    "/privacyverklaring",
+    "/cookieverklaring",
+    "/algemene-voorwaarden",
+    "/resultaten",
+    "/resultaten/[slug]",
+    "/kennisbank",
+    "/kennisbank/[slug]",
+    "/kennisbank/categorie/[slug]",
+    "/toegankelijkheid",
+    "/beveiliging"
+  ],
+  "noindexRoutes": [
+    "/bedankt",
+    "/brand",
+    "error routes",
+    "preview routes",
+    "draft routes",
+    "empty taxonomies"
+  ],
+  "logoMasters": [
+    {
+      "kind": "combined",
+      "surface": "light",
+      "path": "assets/logos/DG-Webservices-Combined-Light-Mode-8192-1.svg",
+      "sha256": "7bf0719807c29d44a26ce4cee76fb0d37957c0f972d90c891e99e39ae3cb0766"
+    },
+    {
+      "kind": "combined",
+      "surface": "dark",
+      "path": "assets/logos/DG-Webservices-Combined-Dark-Mode-8192.svg",
+      "sha256": "7206731cb11e1736e03d13bce6f3d72e2988c36ec10fbd0b1ba32a8cfecf63f3"
+    },
+    {
+      "kind": "icon",
+      "surface": "light",
+      "path": "assets/logos/DG-Webservices-Icon-Light-Mode-8192.svg",
+      "sha256": "c6ea07a4ba0d1e9f42962199843a8af81349647b22a175eaf73554af9cadbc7e"
+    },
+    {
+      "kind": "icon",
+      "surface": "dark",
+      "path": "assets/logos/DG-Webservices-Icon-Dark-Mode-8192.svg",
+      "sha256": "e105e9a1705b941af7f98db3b02aa806e1753de342eb3b201c3ce87ffa0367d9"
+    }
+  ],
+  "photography": [
+    { "name": "hero-digital-studio", "role": "hero", "source": "assets/photography/original/hero-digital-studio.png" },
+    { "name": "sports-platforms", "role": "functional example", "source": "assets/photography/original/sports-platforms.png" },
+    { "name": "connected-business", "role": "functional example", "source": "assets/photography/original/connected-business.png" }
+  ],
+  "qualityGates": {
+    "wcag": "2.2 AA",
+    "lighthouseMobile": { "performance": 90, "accessibility": 95, "bestPractices": 95, "seo": 100 },
+    "coreWebVitals": { "lcpSecondsMax": 2.5, "inpMillisecondsMax": 200, "clsMax": 0.1 },
+    "viewports": [320, 360, 390, 768, 1024, 1280, 1440, 1920],
+    "brokenInternalLinksMax": 0,
+    "orphanPagesMax": 0,
+    "structuredDataErrorsMax": 0,
+    "logoHashMismatchesMax": 0
+  },
+  "launchBlockers": [
+    "definitief productiedomein en hostbeleid",
+    "geverifieerde bedrijfs- en contactgegevens",
+    "contactontvanger, deliveryconfiguratie en afzender",
+    "privacytekst, bewaartermijnen en verwerkers",
+    "cookie-/trackingbesluit en consent",
+    "algemene voorwaarden indien gepubliceerd",
+    "beeldrechten en releases",
+    "echte social-profielen",
+    "cases, reviews en bewijsclaims indien geactiveerd"
+  ]
+}

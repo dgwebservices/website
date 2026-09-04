@@ -1,0 +1,49 @@
+[
+  {
+    "path": "public/favicon.ico",
+    "source": "DG-Webservices-Icon-Light-Mode-8192.svg",
+    "sha256": "4bf5fb2dadbc12351c72d0258f5417333d85ecd99fb4e2f9a0496740ffbda900"
+  },
+  {
+    "path": "public/icons/icon-192.png",
+    "source": "DG-Webservices-Icon-Light-Mode-8192.svg",
+    "width": 192,
+    "height": 192,
+    "sha256": "1af4edc54b4bcabd7440643e5bd9e04ae6b8329938980e946a2eb384ac5789d3"
+  },
+  {
+    "path": "public/icons/icon-512.png",
+    "source": "DG-Webservices-Icon-Light-Mode-8192.svg",
+    "width": 512,
+    "height": 512,
+    "sha256": "884c75cbcfadc593baa7a9a29ddd34fb3716d3c953fbd670138d9be4f1cfbdaf"
+  },
+  {
+    "path": "public/icons/maskable-192.png",
+    "source": "DG-Webservices-Icon-Dark-Mode-8192.svg",
+    "width": 192,
+    "height": 192,
+    "sha256": "a91ae416a21d0658d5e766b4ad73d2e0d7a67507c921cbc6330be5eb8d1f4077"
+  },
+  {
+    "path": "public/icons/maskable-512.png",
+    "source": "DG-Webservices-Icon-Dark-Mode-8192.svg",
+    "width": 512,
+    "height": 512,
+    "sha256": "9b25b05359b5beb46693bb86d0672da1fec0515a8cc1e230caf451d2c14ed1b8"
+  },
+  {
+    "path": "public/icons/apple-touch-icon.png",
+    "source": "DG-Webservices-Icon-Light-Mode-8192.svg",
+    "width": 180,
+    "height": 180,
+    "sha256": "ccdbdaf9ede3789841d5c96958efbd7e373b44a4f2b623158c5e9c68ae70f27e"
+  },
+  {
+    "path": "public/social/dg-webservices.png",
+    "source": "DG-Webservices-Combined-Dark-Mode-8192.svg",
+    "width": 1200,
+    "height": 630,
+    "sha256": "a746a346fea8fab57bd940c8e072ec310dca6c57f6beb93983762f2022589bbb"
+  }
+]
