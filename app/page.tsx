@@ -51,7 +51,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="capability-band" aria-label="Diensten"><div>{services.map((service) => <span key={service.slug}>{service.navigationLabel}</span>)}</div></section>
+      <section className="capability-band" aria-label="Diensten">
+        <div className="capability-track">
+          {[0, 1].map((group) => <div className="capability-group" key={group} aria-hidden={group === 1 ? "true" : undefined}>{services.map((service) => <span key={service.slug}>{service.navigationLabel}</span>)}</div>)}
+        </div>
+      </section>
 
       <section className="section situations-section"><div className="container"><div className="section-heading"><span className="eyebrow">Begin bij de praktijk</span><h2>Waar loopt het nu vast?</h2><p>Je hoeft de oplossing nog niet te kennen. Een herkenbare situatie is genoeg om de juiste richting te verkennen.</p></div><div className="situation-grid">{situations.map((item) => <Link key={item.title} href={item.href}><span>{item.service}</span><h3>{item.title}</h3><strong>Bekijk een passende route <span aria-hidden="true">→</span></strong></Link>)}</div></div></section>
 

@@ -7,15 +7,16 @@ test("core routes render without horizontal overflow or browser errors", async (
   const browserErrors: string[] = [];
   for (const width of [320, 360, 390, 768, 1024, 1280, 1440, 1920]) {
     const context = await browser.newContext({ viewport: { width, height: width < 850 ? 844 : 1000 } });
-    const page = await context.newPage();
-    page.on("pageerror", (error) => browserErrors.push(`${width}: ${error.message}`));
     const routes = [390, 1440].includes(width) ? coreRoutes : ["/", "/diensten", "/diensten/webapplicaties", "/contact"];
     for (const route of routes) {
+      const page = await context.newPage();
+      page.on("pageerror", (error) => browserErrors.push(`${width} ${route}: ${error.message}`));
       const response = await page.goto(route, { waitUntil: "load" });
       expect(response?.status(), route).toBe(route === "/bestaat-niet" ? 404 : 200);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, `${route} at ${width}px`).toBeLessThanOrEqual(1);
       await expect(page.locator("h1")).toHaveCount(1);
+      await page.close();
     }
     await context.close();
   }
@@ -80,16 +81,20 @@ test("core content and navigation remain available without JavaScript", async ({
   await context.close();
 });
 
-test("visual regression evidence for representative templates", async ({ page }) => {
+test("visual regression evidence for representative templates", async ({ browser }) => {
+  test.setTimeout(180_000);
   const routes = [
     ["home", "/"], ["diensten", "/diensten"], ["dienst-licht", "/diensten/websites"], ["dienst-rijk", "/diensten/schermcommunicatie"],
     ["mogelijkheden", "/mogelijkheden"], ["werkwijze", "/werkwijze"], ["contact", "/contact"], ["brand", "/brand"], ["404", "/bestaat-niet"],
   ] as const;
   for (const width of [390, 768, 1024, 1440, 1920]) {
-    await page.setViewportSize({ width, height: width < 900 ? 844 : 1000 });
+    const context = await browser.newContext({ viewport: { width, height: width < 900 ? 844 : 1000 } });
     for (const [name, route] of routes) {
+      const page = await context.newPage();
       await page.goto(route, { waitUntil: "networkidle" });
       await page.screenshot({ path: `outputs/visual/${name}-${width}.png`, fullPage: width === 1440 });
+      await page.close();
     }
+    await context.close();
   }
 });
