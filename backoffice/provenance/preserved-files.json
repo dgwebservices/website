@@ -1,0 +1,117 @@
+{
+  "sourceCommit": "66632d2d92e1ac4fa7ee5645c2153ad0d9256557",
+  "files": [
+    {
+      "path": "public/admin/account.css",
+      "sha256": "db0b342257da6d1550eb6c1412c47bb04cc0a014730c168aa3feef9c6e52d0cb"
+    },
+    {
+      "path": "public/admin/admin.css",
+      "sha256": "685edb79e01a9a95f1fe896132e1b625630bc3f72596a9a347254fe67d67ab75"
+    },
+    {
+      "path": "public/admin/admin.js",
+      "sha256": "87806acbdab59e3f85ed906cb08008c3cf3c680baa20dca8a73503592558b7d8"
+    },
+    {
+      "path": "public/admin/assets/DG-Webservices-Combined-Dark-Mode-8192.svg",
+      "sha256": "7206731cb11e1736e03d13bce6f3d72e2988c36ec10fbd0b1ba32a8cfecf63f3"
+    },
+    {
+      "path": "public/admin/assets/DG-Webservices-Combined-Light-Mode-8192-1.svg",
+      "sha256": "7bf0719807c29d44a26ce4cee76fb0d37957c0f972d90c891e99e39ae3cb0766"
+    },
+    {
+      "path": "public/admin/assets/DG-Webservices-Icon-Dark-Mode-8192.svg",
+      "sha256": "e105e9a1705b941af7f98db3b02aa806e1753de342eb3b201c3ce87ffa0367d9"
+    },
+    {
+      "path": "public/admin/assets/DG-Webservices-Icon-Light-Mode-8192.svg",
+      "sha256": "c6ea07a4ba0d1e9f42962199843a8af81349647b22a175eaf73554af9cadbc7e"
+    },
+    {
+      "path": "public/admin/assets/favicon.svg",
+      "sha256": "c6ea07a4ba0d1e9f42962199843a8af81349647b22a175eaf73554af9cadbc7e"
+    },
+    {
+      "path": "public/admin/assets/manrope-latin-wght-normal.woff2",
+      "sha256": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972"
+    },
+    {
+      "path": "public/admin/assets/space-grotesk-latin-wght-normal.woff2",
+      "sha256": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d"
+    },
+    {
+      "path": "public/admin/commerce.css",
+      "sha256": "7dcf7e382ceb313c4a1b7b79d2ee7798d6c5c98bd682f71d54e41de409494118"
+    },
+    {
+      "path": "public/admin/components.css",
+      "sha256": "0acee92e7ab8712b560eb9cb096741eff852faf3b7267c9dc89f8aa02cebba1f"
+    },
+    {
+      "path": "public/admin/deploy-wizard.js",
+      "sha256": "cb8e53f3ec71a7359da1285e411ab7478556a9949e875bf76834772b48cc8ecd"
+    },
+    {
+      "path": "public/admin/hardening-wizard.js",
+      "sha256": "d9b63ad38318ba14b8b7d6192d07d12b5a5fecaefaa725247bd6f0cecc29ebef"
+    },
+    {
+      "path": "public/admin/infra-wizards.css",
+      "sha256": "f6d2b7200ba3e55e60d75616ca4be25def2d910f763f0c7b6e3e38bf311c25b3"
+    },
+    {
+      "path": "public/admin/infrastructure-data.js",
+      "sha256": "7209611ed9be94efee44274fdc2cc4e056cd75185f83220da0237ef1558df454"
+    },
+    {
+      "path": "public/admin/infrastructure.css",
+      "sha256": "b9990bab0f5775481dd05370fa74f66d96e04373e5babbe9fafcd1eec1649e26"
+    },
+    {
+      "path": "public/admin/maildesk.css",
+      "sha256": "ae133cfc953a37e806ac1f1501bfbf7e6f7f846b7bb28b601706b237693e5b7a"
+    },
+    {
+      "path": "public/admin/management.css",
+      "sha256": "55441b2add489de56ac464ff2fbaae958921a18ef6c73c5a16a41b67df216bed"
+    },
+    {
+      "path": "public/admin/midnight-dashboard.css",
+      "sha256": "f3e7fddeaaa17026696462246377d5abfc5e4418047d1bcfe02b974be0c95b6a"
+    },
+    {
+      "path": "public/admin/midnight-theme.css",
+      "sha256": "50f721521d552a5fbd86b5f6785588be09b1032b7fd8c0eec9612c5b8ff9a972"
+    },
+    {
+      "path": "public/admin/midnight.js",
+      "sha256": "e480ccee180c280ccb1af6b48f7a85b49d5e570275fe18dbb1551c6a4712021a"
+    },
+    {
+      "path": "public/admin/pages.css",
+      "sha256": "e087b483eb07ac16746bff3ca7e61cc5896dbb5de862b7bee81762f064f8622e"
+    },
+    {
+      "path": "public/admin/pages.js",
+      "sha256": "d4b14724d520651522f7a77b08ea5fae1dce9495e3552c228f4561755c4fde3a"
+    },
+    {
+      "path": "public/admin/services.css",
+      "sha256": "09eb504902cf430942d4e33999466179c7197d13c0c70553c693705f6a5f5845"
+    },
+    {
+      "path": "public/admin/styles.css",
+      "sha256": "1b6df5910975e84a588b9b9a8e30315aa349dfb56b92474ab777f809b723e7d5"
+    },
+    {
+      "path": "public/admin/support.css",
+      "sha256": "a2821d3097c3f9ba3929ede05007119fd85932e56989ce15db5dc4c3a10eceb7"
+    },
+    {
+      "path": "public/admin/vaults.css",
+      "sha256": "73c99b5fe75d61e275672e49aa03bc2c88dc6ea51f09f93f9e8847061ca21181"
+    }
+  ]
+}

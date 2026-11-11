@@ -6,6 +6,8 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "backoffice:review": "node scripts/backoffice-review.mjs",
+    "test:backoffice": "node --test tests/backoffice-*.test.mjs backoffice/fixture/tests/*.test.mjs",
     "install:ci": "bash scripts/install-ci.sh",
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vite",
     "build": "bash scripts/build-verified.sh",

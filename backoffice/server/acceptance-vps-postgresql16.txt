@@ -1,0 +1,27 @@
+Development VPS acceptance after canonical requestId UUID guard.
+Isolated official Ubuntu PostgreSQL16.15 extracted under dedicated dg-bo-dev-app QA path; no TCP, no system install/service, stub Auth only.
+Command: DG_BO_TEST_DATABASE_URL=<explicit private Unix socket fixture> node --test tests/backoffice-domain-sql.test.mjs
+Server stopped after successful test. No real Supabase project writes.
+
+▶ isolated PostgreSQL contracts: current MFA/session, roles, CAS, idempotency and private support
+  ✔ RLS/direct-table deny, MFA, expired and revoked sessions, immutable database membership (326.587571ms)
+  ✔ schema validation, secret rejection, environment derivation and fail-closed provider commands (198.826638ms)
+  ✔ 8+8 wizard validation, incomplete drafts, atomic inventory batch rollback and example prohibition (197.258452ms)
+  ✔ normalized support drafts CAS and atomic create/replay (194.127098ms)
+  ✔ private notes do not change any client DTO, list, timestamps or counters; cross-org and workspace IDOR (260.227764ms)
+  ✔ idempotent receipt cannot replay internal content after visibility permission revoked (95.574714ms)
+  ✔ manual customer import exact preview, config binding, replay, no billing and no email merge (350.384582ms)
+  ✔ import plans reject stale configuration, expired preview, duplicate conflicts and untrusted fixture sources (610.718036ms)
+  ✔ database exception rolls back organization/source/receipt/job/idempotency together (187.680172ms)
+  ✔ separate private channel cap cannot exhaust public replies and list exposes its bounded limit (206.852457ms)
+  ✔ manual owner bootstrap requires exact confirmed UUID and never overwrites other memberships (176.079821ms)
+  ✔ audit redaction, direct helper denial and actor supplied fields cannot grant scope (112.756185ms)
+✔ isolated PostgreSQL contracts: current MFA/session, roles, CAS, idempotency and private support (3194.229714ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3286.93686
