@@ -16,6 +16,8 @@ concurrency:
 jobs:
   deploy:
     name: Deploy DG Webservices
+    if: github.ref == 'refs/heads/production'
+    environment: production
 
     runs-on:
       - self-hosted
@@ -33,16 +35,27 @@ jobs:
       ALLOW_INDEXING: "false"
       APP_REVISION: ${{ github.sha }}
 
+      # Exactly four native backoffice Variables from the existing environment.
+      DGWEB_APP_ORIGIN: ${{ vars.DGWEB_APP_ORIGIN }}
+      DGWEB_DATA_MODE: ${{ vars.DGWEB_DATA_MODE }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+
       DG_RUNTIME_ENV_KEYS: >-
         NEXT_PUBLIC_SITE_URL
         APP_ENVIRONMENT
         ALLOW_INDEXING
         APP_REVISION
+        DGWEB_APP_ORIGIN
+        DGWEB_DATA_MODE
+        NEXT_PUBLIC_SUPABASE_URL
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
     steps:
       - name: Checkout exact revision
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.sha }}
           fetch-depth: 1
           persist-credentials: false
           clean: true
@@ -67,6 +80,27 @@ jobs:
           test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
 
           echo "Runner boundary OK"
+
+      - name: Validate confirmed backoffice target
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          # Validate presence and target without printing configured values.
+          node --input-type=module <<'NODE'
+          const expected = {
+            DGWEB_APP_ORIGIN: 'https://dgwebservices.nl/admin',
+            DGWEB_DATA_MODE: 'supabase',
+            NEXT_PUBLIC_SUPABASE_URL: 'https://prjvxusiqzadpaitcqxr.supabase.co',
+          };
+          for (const [key, value] of Object.entries(expected)) {
+            if (process.env[key] !== value) throw new Error(`Missing or unconfirmed production Variable: ${key}`);
+          }
+          if (!/^sb_publishable_[A-Za-z0-9_-]+$/.test(process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '')) {
+            throw new Error('Missing or invalid NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY');
+          }
+          console.log('Confirmed backoffice runtime target present');
+          NODE
 
       - name: Deploy production
         shell: bash

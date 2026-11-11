@@ -1,0 +1,129 @@
+name: Backoffice CI
+
+on:
+  pull_request:
+    branches:
+      - production
+  push:
+    branches:
+      - codex/dg-backoffice-admin
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backoffice-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Public loopback fixture configuration only. These jobs have no environment,
+# production Variables, Supabase credentials or access to a deployment runner.
+env:
+  CI: "true"
+  DGWEB_DATA_MODE: fixture
+  DGWEB_APP_ORIGIN: http://127.0.0.1:4188/admin
+  NEXT_PUBLIC_SITE_URL: https://www.dgwebservices.nl
+  APP_ENVIRONMENT: test
+  ALLOW_INDEXING: "false"
+  APP_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  verify:
+    name: Source, types, dual build and contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact CI revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          clean: true
+
+      - name: Set up Node 24.19
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+          check-latest: false
+
+      - name: Verify intended source revision and Node version
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git rev-parse HEAD)" = "${APP_REVISION}"
+          printf 'Tested source SHA: %s\nGitHub event SHA: %s\n' "${APP_REVISION}" "${GITHUB_SHA}"
+          test "$(node --version)" = "v24.19.0"
+
+      - name: Install existing lockfile
+        run: npm run install:ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Verify pinned backoffice source
+        run: node scripts/check-backoffice-source.mjs
+
+      - name: Typecheck
+        run: npx --no-install tsc --noEmit --incremental false
+
+      - name: Build Vinext and Next.js
+        run: npm run build
+
+      - name: Website contracts
+        run: node --test tests/content.test.mjs tests/site.test.mjs
+
+      - name: Backoffice contracts and isolated fixtures
+        run: npm run test:backoffice
+
+  sql-contracts:
+    name: Disposable PostgreSQL contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        # Explicit supported tag verified in docker-library/official-images.
+        image: postgres:16.15-bookworm
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ci-disposable-only
+          POSTGRES_DB: dg_bo_contract_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d dg_bo_contract_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - name: Checkout exact SQL test revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          clean: true
+
+      - name: Set up Node 24.19
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+          check-latest: false
+
+      - name: Verify revision and PostgreSQL client
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git rev-parse HEAD)" = "${APP_REVISION}"
+          printf 'Tested source SHA: %s\nGitHub event SHA: %s\n' "${APP_REVISION}" "${GITHUB_SHA}"
+          test "$(node --version)" = "v24.19.0"
+          if ! command -v psql >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install --no-install-recommends --yes postgresql-client
+          fi
+          psql --version
+
+      - name: Run SQL acceptance in empty disposable database
+        env:
+          # Credentials apply only to this job's temporary local service.
+          DG_BO_TEST_DATABASE_URL: postgresql://postgres:ci-disposable-only@127.0.0.1:5432/dg_bo_contract_test
+        run: node --test tests/backoffice-domain-sql.test.mjs

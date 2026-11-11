@@ -1,0 +1,32 @@
+Local disposable PostgreSQL 16.15; no TCP; stub Supabase Auth; no real project data or writes.
+Node v24.18.0
+Command: DG_BO_TEST_DATABASE_URL=<explicit local disposable connection> node --test tests/backoffice-domain.test.mjs tests/backoffice-domain-sql.test.mjs
+Exit 0
+▶ isolated PostgreSQL contracts: current MFA/session, roles, CAS, idempotency and private support
+  ✔ RLS/direct-table deny, MFA, expired and revoked sessions, immutable database membership (952.021959ms)
+  ✔ schema validation, secret rejection, environment derivation and fail-closed provider commands (390.252287ms)
+  ✔ 8+8 wizard validation, incomplete drafts, atomic inventory batch rollback and example prohibition (308.325056ms)
+  ✔ normalized support drafts CAS and atomic create/replay (258.386221ms)
+  ✔ private notes do not change any client DTO, list, timestamps or counters; cross-org and workspace IDOR (384.427683ms)
+  ✔ idempotent receipt cannot replay internal content after visibility permission revoked (228.847718ms)
+  ✔ manual customer import exact preview, config binding, replay, no billing and no email merge (583.275124ms)
+  ✔ import plans reject stale configuration, expired preview, duplicate conflicts and untrusted fixture sources (1004.243323ms)
+  ✔ database exception rolls back organization/source/receipt/job/idempotency together (320.040878ms)
+  ✔ separate private channel cap cannot exhaust public replies and list exposes its bounded limit (282.290871ms)
+  ✔ manual owner bootstrap requires exact confirmed UUID and never overwrites other memberships (349.280229ms)
+  ✔ audit redaction, direct helper denial and actor supplied fields cannot grant scope (108.604091ms)
+✔ isolated PostgreSQL contracts: current MFA/session, roles, CAS, idempotency and private support (5464.184905ms)
+✔ domain transport forwards user token plus publishable key, never browser actor claims (20.439478ms)
+✔ invalid config, untrusted path, methods and secrets fail before network (1.325708ms)
+✔ installation format/completion validation precedes server RPC and environment metadata is authoritative (1.758085ms)
+✔ wizard batch checks previous scoped state and rejects stale/forged guards without mutation RPC (2.080712ms)
+✔ transport failures redact provider/database details and preserve uncertain write status (1.268332ms)
+✔ SQL authoritative field schemas match all 15 installation and original 8+8 definitions (2.651468ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5522.940929

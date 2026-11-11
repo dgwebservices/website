@@ -1,0 +1,15 @@
+{
+  "title": "DG Webservices · Midnight Portal",
+  "siteVersion": 8,
+  "gitCommit": "66632d2d92e1ac4fa7ee5645c2153ad0d9256557",
+  "publicOrigin": "https://dg-webservices-portal-designs.dgwebserv.chatgpt.site",
+  "access": "owner-private",
+  "snapshotDate": "2026-11-11",
+  "snapshotMethod": "git archive of tracked dist, README.md and five textual reference docs",
+  "sourceScope": "Entire runnable prototype: all JS, CSS, HTML, logos and fonts; no Git history, hosting control manifest, browser state, or screenshots",
+  "adminRoutes": 16,
+  "clientRoutes": 11,
+  "infraTabs": 9,
+  "deploymentWizardSteps": 8,
+  "hardeningWizardSteps": 8
+}

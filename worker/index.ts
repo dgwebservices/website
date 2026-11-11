@@ -7,6 +7,10 @@ interface Env {
   DB?: D1Database;
   APP_ENVIRONMENT?: string;
   ALLOW_INDEXING?: string;
+  DGWEB_APP_ORIGIN?: string;
+  DGWEB_DATA_MODE?: string;
+  NEXT_PUBLIC_SUPABASE_URL?: string;
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
@@ -36,6 +40,10 @@ const worker = {
     const runtimeEnv = env ?? ({
       APP_ENVIRONMENT: nodeEnv?.APP_ENVIRONMENT,
       ALLOW_INDEXING: nodeEnv?.ALLOW_INDEXING,
+      DGWEB_APP_ORIGIN: nodeEnv?.DGWEB_APP_ORIGIN,
+      DGWEB_DATA_MODE: nodeEnv?.DGWEB_DATA_MODE,
+      NEXT_PUBLIC_SUPABASE_URL: nodeEnv?.NEXT_PUBLIC_SUPABASE_URL,
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: nodeEnv?.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
     } as Env);
     (globalThis as typeof globalThis & { __DG_RUNTIME_ENV__?: Env }).__DG_RUNTIME_ENV__ = runtimeEnv;
 
@@ -59,11 +67,17 @@ const worker = {
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
-    headers.set("X-Frame-Options", "DENY");
-    headers.set("Content-Security-Policy", "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'");
+    const backoffice = url.pathname === "/admin" || url.pathname.startsWith("/admin/");
+    headers.set("X-Frame-Options", backoffice ? "SAMEORIGIN" : "DENY");
+    headers.set("Content-Security-Policy", backoffice
+      ? "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; frame-src 'self'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'"
+      : "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'");
     if (runtimeEnv.ALLOW_INDEXING !== "true") headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
     if (runtimeEnv.APP_ENVIRONMENT === "production" && url.protocol === "https:") headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-    if (url.pathname.startsWith("/api/")) headers.set("Cache-Control", "no-store");
+    if (backoffice) {
+      headers.set("Cache-Control", "no-store, private");
+      headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    } else if (url.pathname.startsWith("/api/")) headers.set("Cache-Control", "no-store");
     return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
   },
 };
